@@ -9,6 +9,7 @@ const Home = () => {
                 <p className={"text-white text-4xl font-monot"}>X</p>
                 <Image src={"/eglogo.webp"} className={"ml-4"} alt={"logo"} width={70} height={70} />
             </div>
+            {/* Background Video */}
             <video src={"/nnn.mp4"} autoPlay muted loop></video>
             <div id={"black-overlay"} className={"w-screen h-screen bg-black/30 absolute top-0 left-0"}></div>
             <div className={"absolute top-0 left-0 w-screen h-screen"}>
