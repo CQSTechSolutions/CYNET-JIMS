@@ -16,10 +16,10 @@
 # next.js
 /.next/
 /out/
+.idea/
 
 # production
 /build
-./idea
 
 # misc
 .DS_Store
