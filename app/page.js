@@ -2,6 +2,7 @@ import Home from "@/app/(components)/Home";
 import About from "@/app/(sections)/About";
 import EventOrg from "@/app/(sections)/EventOrg";
 import HeadCord from "@/app/(sections)/HeadCord";
+import Footer from "@/app/(components)/Footer";
 
 
 export default function Page() {
@@ -11,6 +12,7 @@ export default function Page() {
             <About/>
             {/*<EventOrg/>*/}
             <HeadCord />
+            <Footer />
         </div>
     );
 }
