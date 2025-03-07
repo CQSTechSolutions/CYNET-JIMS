@@ -8,9 +8,9 @@ export default function Page() {
     return (
         <div className={"overflow-x-hidden select-none"}>
             <Home/>
-            {/*<About/>*/}
-            {/*<EventOrg/>*/}
-            {/*<HeadCord />*/}
+            <About/>
+            <EventOrg/>
+            <HeadCord />
         </div>
     );
 }
