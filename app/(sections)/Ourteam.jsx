@@ -3,16 +3,20 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const heads = [
-  { name: "Varun", role: "President", image: "/prs.webp" },
-  { name: "John Doe", role: "Vice President", image: "/vp.webp" },
+  { name: "Varun", role: "President", image: "/vp2.webp" },
+  { name: "John Doe", role: "Vice President", image: "/sc.webp" },
+  { name: "Varun", role: "President", image: "/pr.webp" },
+  { name: "John Doe", role: "Vice President", image: "/em.webp" },
+  { name: "Varun", role: "President", image: "/mt.webp" },
+  { name: "John Doe", role: "Vice President", image: "/sm.webp" },
+  { name: "John Doe", role: "Vice President", image: "/smd.webp" },
 ];
 
-const HeadCord = () => {
+const Ourteam = () => {
   return (
     <section className="w-full min-h-screen bg-gradient-to-b from-pink-500 to-black text-white">
       <h2 className="font-monot text-center text-5xl p-3 py-20 flex flex-col justify-center items-center">
-        <span>Head</span>
-        <span>Coordinators</span>
+        <span>Our Team</span>
       </h2>
       <div className="flex flex-wrap items-center justify-center gap-12 px-10">
         {heads.map((head, i) => (
@@ -47,4 +51,4 @@ const HeadCord = () => {
   );
 };
 
-export default HeadCord;
+export default Ourteam;
