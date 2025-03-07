@@ -9,7 +9,7 @@ export default function Page() {
         <div className={"overflow-x-hidden select-none"}>
             <Home/>
             <About/>
-            <EventOrg/>
+            {/*<EventOrg/>*/}
             <HeadCord />
         </div>
     );
