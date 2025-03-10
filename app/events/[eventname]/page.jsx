@@ -4,7 +4,13 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const allowedEvents = [
-    '1','2','3','4'
+    "innovision",
+    "ai-ds",
+    "hth",
+    "game-xcite",
+    "bgrc",
+    "gpfc",
+    "gtqkd"
 ];
 
 const Page = () => {
