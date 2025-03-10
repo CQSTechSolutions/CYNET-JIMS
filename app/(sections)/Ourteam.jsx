@@ -14,7 +14,7 @@ const heads = [
 
 const Ourteam = () => {
   return (
-    <section className="w-full min-h-screen bg-gradient-to-b from-pink-500 to-black text-white">
+    <section className="w-full min-h-screen bg-[url('/8.png')] text-white">
       <h2 className="font-monot text-center text-3xl sm:text-4xl md:text-5xl p-3 py-12 sm:py-16 md:py-20 flex flex-col justify-center items-center">
         <span>Our Team</span>
       </h2>

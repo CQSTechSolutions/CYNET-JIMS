@@ -9,7 +9,7 @@ const heads = [
 
 const HeadCord = () => {
   return (
-    <section className="w-full min-h-screen bg-gradient-to-b from-pink-500 to-black text-white">
+    <section className="w-full min-h-screen bg-[url('/6.png')] text-white">
       <h2 className="font-monot text-center text-3xl md:text-4xl lg:text-5xl p-3 py-12 md:py-16 lg:py-20 flex flex-col justify-center items-center">
         <span>Head</span>
         <span>Coordinators</span>

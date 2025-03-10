@@ -15,7 +15,7 @@ const Home = () => {
                 loop 
                 className="h-full w-full object-cover"
             ></video>
-            <div id={"black-overlay"} className={"w-screen h-screen bg-black/30 absolute top-0 left-0"}></div>
+            {/* <div id={"black-overlay"} className={"w-screen h-screen bg-black/30 absolute top-0 left-0"}></div> */}
             <div className={"absolute top-0 left-0 w-screen h-screen"}>
                 <BigText/>
             </div>

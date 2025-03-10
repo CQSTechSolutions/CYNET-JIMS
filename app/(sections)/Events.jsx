@@ -12,7 +12,7 @@ const Events = () => {
         "green-tech-quest"
     ];
     return (
-        <div className='w-screen min-h-screen font-poppins flex gap-8 flex-col items-center justify-center bg-cover bg-center bg-no-repeat bg-[url(/cynet_eve_bg.png)] py-20 relative'>
+        <div className='w-screen min-h-screen font-poppins flex gap-8 flex-col items-center justify-center bg-cover bg-center bg-no-repeat bg-[url(/4.png)] py-20 relative'>
             <div className='absolute inset-0 bg-black/50'></div>
             <h2 className='text-4xl md:text-6xl font-monot text-white mt-16 z-2'>Events</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4 md:p-8 max-w-7xl mx-auto">
