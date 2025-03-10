@@ -48,12 +48,12 @@ const BigText = () => {
 				<p className={"font-poppins font-semibold text-white"}>
 					[ At, Jagannath International Management School, ]
 				</p>
-				<p className={"font-poppins font-semibold text-white mt-1"}>
+				<p className={"font-poppins font-bold text-white mt-1 text-3xl"}>
 					[ On March 22nd, 2025 ]
 				</p>
 			</div>
 			<Image
-				src={"/cylogo.PNG"}
+				src={"/cylogo.PNG"} 
 				alt={"cylogo"}
 				width={120}
 				height={120}
