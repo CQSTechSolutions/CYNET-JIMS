@@ -13,7 +13,7 @@ const Page = () => {
     });
 
     const events = [
-        { id: 1, name: 'Tech Hackathon 2024', price: '500' },
+        { id: 1, name: 'Tech Hackathon 2024', price: '200' },
         { id: 2, name: 'Coding Competition', price: '300' },
         { id: 3, name: 'Robotics Workshop', price: '800' },
         { id: 4, name: 'AI/ML Seminar', price: '400' },
