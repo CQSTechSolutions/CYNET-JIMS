@@ -11,7 +11,7 @@ const Events = () => {
         "green-tech-quest"
     ];
     return (
-        <div className='w-screen h-screen font-poppins flex gap-18 flex-col items-center justify-center bg-gradient-to-b from-blue-500 to-black'>
+        <div className='w-screen min-h-auto h-screen font-poppins flex gap-18 flex-col items-center justify-center bg-gradient-to-b from-blue-500 to-black'>
             <h2 className='text-6xl font-monot text-white'>Events</h2>
             <div className="flex flex-wrap justify-center gap-6 p-8">
                 {eventList.map((event, index) => (
