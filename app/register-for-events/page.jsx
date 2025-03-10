@@ -39,7 +39,7 @@ const Page = () => {
 
     return (
         <>
-        <div className="min-h-screen bg-green-800 py-12 px-4 sm:px-6 lg:px-8 font-poppins">
+        <div className="min-h-screen bg-green-800 py-12 px-4 sm:px-6 lg:px-8 font-poppins select-none">
             <div className="max-w-3xl mx-auto">
                 {/* Header Section */}
                 <div className="text-center mb-8">
@@ -55,12 +55,25 @@ const Page = () => {
                             <h2 className="text-xl font-semibold text-green-700 pb-2 border-b border-green-200">Personal Information</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
+                                    <label className="block text-sm font-medium text-green-700 mb-1">Enrollment Number</label>
+                                    <input
+                                        type="text"
+                                        name="enrollmentNumber"
+                                        required
+                                        autoComplete="off"
+                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                <div>
                                     <label className="block text-sm font-medium text-green-700 mb-1">Name</label>
                                     <input
                                         type="text"
                                         name="name"
                                         required
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                        autoComplete="off"
+                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -71,7 +84,8 @@ const Page = () => {
                                         type="text"
                                         name="college"
                                         required
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                        autoComplete="off"
+                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -81,24 +95,13 @@ const Page = () => {
                                     <select
                                         name="shift"
                                         required
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
                                         onChange={handleChange}
                                     >
                                         <option value="">Select Shift</option>
                                         <option value="morning">Morning</option>
                                         <option value="evening">Evening</option>
                                     </select>
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-green-700 mb-1">Enrollment Number</label>
-                                    <input
-                                        type="text"
-                                        name="enrollmentNumber"
-                                        required
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                                        onChange={handleChange}
-                                    />
                                 </div>
                             </div>
                         </div>
@@ -111,7 +114,7 @@ const Page = () => {
                                 <select
                                     name="selectedEvent"
                                     required
-                                    className="w-full p-2.5 border border-green-500 rounded-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                    className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
                                     onChange={handleChange}
                                 >
                                     <option value="">Select an Event</option>
@@ -134,7 +137,8 @@ const Page = () => {
                                         type="text"
                                         name="transactionId"
                                         required
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                        autoComplete="off"
+                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
                                         onChange={handleChange}
                                     />
                                 </div>
