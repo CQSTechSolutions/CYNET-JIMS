@@ -1,16 +1,15 @@
 "use client";
-
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const allowedEvents = [
-    "innovision",
-    "ai-ds",
-    "hth",
-    "game-xcite",
-    "bgrc",
-    "gpfc",
-    "gtqkd"
+    "innovision-6",
+    "ai-design-sprint",
+    "hack-the-hunt",
+    "gamexcite",
+    "byete-beyond",
+    "green-pixel",
+    "green-tech-quest"
 ];
 
 const Page = () => {
