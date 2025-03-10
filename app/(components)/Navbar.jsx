@@ -13,7 +13,7 @@ const Navbar = () => {
     return (
         <>
             <div className={"flex items-center justify-between px-10 w-screen absolute top-2 left-0 right-0 md:left-4 md:right-auto z-10"}>
-                <div className="flex items-center">
+                <div className="flex justify-center items-center">
                     <Image 
                         src={"/jimslogo.webp"} 
                         alt={"logo"} 
@@ -22,7 +22,7 @@ const Navbar = () => {
                         className="w-14 h-14 md:w-[100px] md:h-[100px]" 
                     />
                     <Image 
-                     src={"/vk2logo.jpeg"} 
+                     src={"/vk2logo.png"} 
                      alt={"logo"} 
                      width={100} 
                      height={100}
@@ -42,9 +42,10 @@ const Navbar = () => {
                         className="relative group w-10 h-10 flex justify-center items-center z-30"
                     >
                         <span className={`relative flex overflow-hidden items-center justify-center w-8 h-8 transform transition-all`}>
-                            <span className={`flex flex-col justify-between w-7 h-7 transform transition-all duration-300`}>
-                                <span className={`bg-white h-[2px] w-7 transform transition-all duration-300 origin-left`}></span>
-                                <span className={`bg-white h-[2px] w-7 rounded transform transition-all duration-300`}></span>
+                            <span className={`flex flex-col justify-between gap-1 group cursor-pointer transform transition-all duration-300`}>
+                                <span className={`bg-white h-[3px] w-[1vw] group-hover:bg-green-500 transform transition-all duration-300 origin-left`}></span>
+                                <span className={`bg-white h-[3px] w-[2vw] group-hover:bg-green-500 transform transition-all duration-300 origin-left`}></span>
+                                <span className={`bg-white h-[3px] w-[3vw] group-hover:bg-green-500 rounded transform transition-all duration-300`}></span>
                             </span>
                         </span>
                     </button>
