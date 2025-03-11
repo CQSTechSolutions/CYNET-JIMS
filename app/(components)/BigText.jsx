@@ -26,18 +26,18 @@ const BigText = () => {
   return (
     <div
       className={
-        "h-full w-full flex flex-col items-center justify-center px-2 md:px-4"
+        "h-full w-full flex flex-col items-center justify-center px-2 md:px-4 "
       }
     >
       <div
         id={"big-text-wrapper"}
-        className={"flex items-center justify-center gap-1 md:gap-5"}
+        className={"flex items-center justify-center gap-1 md:gap-5 z-10"}
       >
         {bigTextCnt.map((c, index) => (
           <div key={index} className={"text-white flex flex-col gap-1"}>
             <p
               className={
-                "mt-3 md:mt-5 text-center font-poppins tracking-[0.2vw] md:tracking-[0.5vw] text-[10px] md:text-base whitespace-nowrap"
+                "mt-3 md:mt-5 text-green-500 text-center font-poppins tracking-[0.2vw] md:tracking-[0.5vw] text-[10px] md:text-base whitespace-nowrap font-semibold"
               }
             >
               {c.small_Letter}
@@ -52,12 +52,12 @@ const BigText = () => {
           </div>
         ))}
       </div>
-      <div className="text-center text-xs md:text-sm">
-        <p className={"font-poppins font-semibold text-white"}>
-          [ At, Jagannath International Management School, ]
+      <div className="text-center text-xs md:text-sm z-10">
+        <p className={"font-poppins font-semibold text-white text-xl"}>
+          [ Jagannath International Management School, New Delhi]
         </p>
         <p className={"font-poppins font-bold text-white mt-1 text-3xl"}>
-          [ On March 22nd, 2025 ]
+          [ <span className="text-green-600">March 22nd, 2025</span> ]
         </p>
       </div>
       <Image
@@ -66,7 +66,7 @@ const BigText = () => {
         width={120}
         height={120}
         className={
-          "rounded-full mt-4 md:mt-6 w-32 h-32 md:w-[120px] md:h-[120px]"
+          "rounded-full mt-4 md:mt-6 w-32 h-32 md:w-[120px] md:h-[120px] z-10"
         }
       />
     </div>
