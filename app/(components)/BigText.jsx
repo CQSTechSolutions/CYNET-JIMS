@@ -30,13 +30,17 @@ const BigText = () => {
       <div className="flex items-center justify-center gap-1 sm:gap-2 md:gap-3 lg:gap-4">
         {bigTextCnt.map((c, index) => (
           <div key={index} className="text-white flex flex-col items-center">
-            <p className="text-green-500 font-poppins text-[2vw] sm:text-[1.8vw] md:text-[1.5vw] lg:text-[1.2vw] 
-                        tracking-wider font-semibold mb-0">
+            <p
+              className="text-green-500 font-poppins text-[2vw] sm:text-[1.8vw] md:text-[1.5vw] lg:text-[1.2vw] 
+                        tracking-wider font-semibold mb-0"
+            >
               {c.small_Letter}
             </p>
-            <h2 className="text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] 
+            <h2
+              className="text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] 
                          leading-none font-monot bg-gradient-to-b from-white to-white/40 
-                         text-transparent bg-clip-text">
+                         text-transparent bg-clip-text"
+            >
               {c.big_Letter}
             </h2>
           </div>
@@ -45,12 +49,16 @@ const BigText = () => {
 
       {/* Subtitle Text */}
       <div className="text-center mt-4 sm:mt-6 md:mt-8">
-        <p className="font-poppins font-semibold text-white 
-                     text-[2.5vw] sm:text-[2vw] md:text-[1.8vw] lg:text-[1.5vw]">
+        <p
+          className="font-poppins font-semibold text-white 
+                     text-[2.5vw] sm:text-[2vw] md:text-[1.8vw] lg:text-[1.5vw]"
+        >
           Jagannath International Management School, Vasant Kunj, New Delhi
         </p>
-        <p className="font-poppins font-bold text-white mt-2 
-                     text-[3vw] sm:text-[2.5vw] md:text-[2vw] lg:text-[1.8vw]">
+        <p
+          className="font-poppins font-bold text-white mt-2 
+                     text-[3vw] sm:text-[2.5vw] md:text-[2vw] lg:text-[1.8vw]"
+        >
           <span className="text-green-500">March 22nd, 2025</span>
         </p>
       </div>
