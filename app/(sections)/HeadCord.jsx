@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 
 const heads = [
   { name: "dhruv", role: "President", image: "/prs.webp" },
-  { name: "rachit", role: "Vice President", image: "/vp.webp" },
 ];
 
 const HeadCord = () => {
