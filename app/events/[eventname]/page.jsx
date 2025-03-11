@@ -1,48 +1,50 @@
 "use client";
-import { useParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const allowedEvents = [
-    "innovision-6",
-    "ai-design-sprint",
-    "hack-the-hunt",
-    "gamexcite",
-    "byete-beyond",
-    "green-pixel",
-    "green-tech-quest"
+  "innovision-6",
+  "ai-design-sprint",
+  "hack-the-hunt",
+  "gamexcite",
+  "byete-beyond",
+  "green-pixel",
+  "green-tech-quest",
 ];
 
 const Page = () => {
-    const router = useRouter();
-    const params = useParams();
-    const eventname = params.eventname;
+  const router = useRouter();
+  const params = useParams();
+  const eventname = params.eventname;
 
-    useEffect(() => {
-        if (eventname && !allowedEvents.includes(eventname)) {
-            router.push('/404');
-        }
-    }, [eventname, router]);
-
-    if (!eventname) {
-        return null;
+  useEffect(() => {
+    if (eventname && !allowedEvents.includes(eventname)) {
+      router.push("/404");
     }
+  }, [eventname, router]);
 
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            {allowedEvents.includes(eventname) ? (
-                <div className="text-center p-8">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                        {eventname.replace(/-/g, ' ').split(' ').map(word => 
-                            word.charAt(0).toUpperCase() + word.slice(1)
-                        ).join(' ')}
-                    </h1>
-                    <p className="text-lg text-gray-600">
-                        Welcome to our event page. More details coming soon!
-                    </p>
-                </div>
-            ) : null}
+  if (!eventname) {
+    return null;
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      {allowedEvents.includes(eventname) ? (
+        <div className="text-center p-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            {eventname
+              .replace(/-/g, " ")
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ")}
+          </h1>
+          <p className="text-lg text-gray-600">
+            Welcome to our event page. More details coming soon!
+          </p>
         </div>
-    );
+      ) : null}
+    </div>
+  );
 };
 
 export default Page;
