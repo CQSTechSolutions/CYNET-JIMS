@@ -54,10 +54,10 @@ const BigText = () => {
       </div>
       <div className="text-center text-xs md:text-sm z-10">
         <p className={"font-poppins font-semibold text-white text-xl"}>
-          [ Jagannath International Management School, New Delhi]
+          Jagannath International Management School, Vasant Kunj, New Delhi
         </p>
         <p className={"font-poppins font-bold text-white mt-1 text-3xl"}>
-          [ <span className="text-green-600">March 22nd, 2025</span> ]
+          <span className="text-green-600">March 22nd, 2025</span>
         </p>
       </div>
       <Image
