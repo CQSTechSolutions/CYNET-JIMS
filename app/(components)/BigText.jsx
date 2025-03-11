@@ -47,11 +47,11 @@ const BigText = () => {
       <div className="text-center mt-4 sm:mt-6 md:mt-8">
         <p className="font-poppins font-semibold text-white 
                      text-[2.5vw] sm:text-[2vw] md:text-[1.8vw] lg:text-[1.5vw]">
-          [ Jagannath International Management School, New Delhi ]
+          Jagannath International Management School, Vasant Kunj, New Delhi
         </p>
         <p className="font-poppins font-bold text-white mt-2 
                      text-[3vw] sm:text-[2.5vw] md:text-[2vw] lg:text-[1.8vw]">
-          [ <span className="text-green-500">March 22nd, 2025</span> ]
+          <span className="text-green-500">March 22nd, 2025</span>
         </p>
       </div>
 

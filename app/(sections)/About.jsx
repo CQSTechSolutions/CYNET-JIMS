@@ -2,7 +2,7 @@
 
 const About = () => {
     return(
-        <section className={"w-full min-h-screen bg-[url('/extra.png')] text-white relative"}>
+        <section className={"w-full min-h-screen bg-[url('/extra.png')] text-white relative bg-fixed"}>
             <div className='absolute inset-0 bg-black/50'></div>
             <div className='relative z-10'>
                 <h2 className={"font-monot text-center text-3xl sm:text-4xl md:text-5xl p-3 py-10 md:py-20"}>About - Cynet</h2>
