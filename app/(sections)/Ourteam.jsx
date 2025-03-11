@@ -6,58 +6,50 @@ import { useInView } from 'react-intersection-observer';
 const heads = [
   { 
     name: "Divyan Mayank", 
-    role: "President", 
-    designation: "Technical Head",
+    role: "Vice President", 
     position: "Core Team",
     image: "/vp2.webp" 
   },
   { 
     name: "Harshit Verma", 
-    role: "Vice President", 
-    designation: "Event Coordinator",
+    role: "Events Management Director", 
     position: "Management Team",
     image: "/em.webp" 
   },
   { 
     name: "Mehak Arora", 
-    role: "Vice President", 
-    designation: "Creative Head",
-    position: "Design Team",
+    role: "Secretary", 
+    position: "Core Team",
     image: "/sc.webp" 
   },
   { 
-    name: "Kirat Awasth", 
-    role: "President", 
-    designation: "Marketing Lead",
-    position: "PR Team",
+    name: "Kirat Awasthi", 
+    role: "Marketing Director", 
+    position: "Marketing Team",
     image: "/mt.webp" 
   },
   { 
     name: "Hardik Solanki", 
-    role: "President", 
-    designation: "Operations Head",
-    position: "Core Team",
+    role: "P.R Director", 
+    position: "Public Relations Team",
     image: "/pr.webp" 
   },
   { 
     name: "Aniket Choudhary", 
-    role: "Vice President", 
-    designation: "Social Media Manager",
-    position: "Marketing Team",
+    role: "Stills & Motions Director", 
+    position: "Stills & Motion Team",
     image: "/sm.webp" 
   },
   { 
     name: "Rachel Arora", 
-    role: "Vice President", 
-    designation: "Content Head",
-    position: "Creative Team",
+    role: "Social Media Director", 
+    position: "Social Media Team",
     image: "/smd.webp" 
   },
   { 
-    name: "John Doe", 
-    role: "Vice President", 
-    designation: "Technical Coordinator",
-    position: "Development Team",
+    name: "Gurnoor Kaur Pawan", 
+    role: "Content Director", 
+    position: "Content Team",
     image: "/ct.webp" 
   },
 ];
@@ -107,7 +99,6 @@ const Ourteam = () => {
                     <p className="text-lg sm:text-xl font-bold">{head.name}</p>
                     <p className="text-xs sm:text-sm text-[#CBFF4D] font-semibold">{head.role}</p>
                     <div className="w-12 h-0.5 bg-[#CBFF4D] mx-auto my-2"></div>
-                    <p className="text-sm text-white/90">{head.designation}</p>
                     <p className="text-xs text-[#CBFF4D]/80">{head.position}</p>
                   </div>
                 </div>
