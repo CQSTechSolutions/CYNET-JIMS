@@ -1,8 +1,28 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
+    const pathname = usePathname();
+
+    // Function to handle smooth scrolling
+    const scrollToSection = (sectionId) => {
+        if (pathname !== '/') {
+            // If not on homepage, navigate to homepage with section hash
+            window.location.href = `#${sectionId}`;
+            return;
+        }
+
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
+
     return (
         <footer className="bg-gradient-to-b from-black to-gray-900 text-white">
             {/* Main Footer Content */}
@@ -48,9 +68,28 @@ const Footer = () => {
                         <h4 className="text-lg font-semibold mb-4 font-monot">Quick Links</h4>
                         <ul className="space-y-2 font-poppins">
                             <li>
-                                <Link href="/events" className="text-gray-400 hover:text-white transition-colors">
+                                <button 
+                                    onClick={() => scrollToSection('events')}
+                                    className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+                                >
                                     Events
-                                </Link>
+                                </button>
+                            </li>
+                            <li>
+                                <button 
+                                    onClick={() => scrollToSection('about')}
+                                    className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+                                >
+                                    About Us
+                                </button>
+                            </li>
+                            <li>
+                                <button 
+                                    onClick={() => scrollToSection('our-team')}
+                                    className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+                                >
+                                    Our Team
+                                </button>
                             </li>
                             <li>
                                 <Link href="/register-for-events" className="text-gray-400 hover:text-white transition-colors">

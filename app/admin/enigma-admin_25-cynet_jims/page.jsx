@@ -1,12 +1,18 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { CldImage } from 'next-cloudinary';
-import { FaSearch, FaFilter } from 'react-icons/fa';
-import { getRegistrations, updateRegistrationStatus } from '@/actions/admin.actions';
+import { FaSearch, FaFilter, FaLock } from 'react-icons/fa';
+import { getRegistrations, updateRegistrationStatus, verifyAdmin } from '@/actions/admin.actions';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AdminDashboard = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loginForm, setLoginForm] = useState({
+        username: '',
+        password: ''
+    });
     const [registrations, setRegistrations] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [selectedPayment, setSelectedPayment] = useState(null);
     const [filters, setFilters] = useState({
@@ -22,6 +28,26 @@ const AdminDashboard = () => {
         },
         sortBy: 'newest'
     });
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        try {
+            const result = await verifyAdmin(loginForm);
+            if (result.success) {
+                setIsAuthenticated(true);
+                toast.success('Login successful!');
+                fetchRegistrations();
+            } else {
+                toast.error('Invalid credentials');
+            }
+        } catch (error) {
+            toast.error('Login failed. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     // Fetch registrations using server action
     const fetchRegistrations = async () => {
@@ -99,6 +125,63 @@ const AdminDashboard = () => {
 
     const uniqueColleges = [...new Set(registrations.map(reg => reg.college))];
     const uniqueSemesters = [...new Set(registrations.map(reg => reg.semester))];
+
+    if (!isAuthenticated) {
+        return (
+            <div className="min-h-screen bg-gradient-to-b from-green-800 to-green-900 flex items-center justify-center px-4">
+                <Toaster position="top-center" />
+                <div className="max-w-md w-full bg-white rounded-lg shadow-xl p-8">
+                    <div className="text-center mb-8">
+                        <FaLock className="mx-auto text-4xl text-green-600 mb-4" />
+                        <h2 className="text-2xl font-bold text-gray-800">Admin Login</h2>
+                        <p className="text-gray-600">Please sign in to continue</p>
+                    </div>
+
+                    <form onSubmit={handleLogin} className="space-y-6">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Username
+                            </label>
+                            <input
+                                type="text"
+                                value={loginForm.username}
+                                onChange={(e) => setLoginForm(prev => ({
+                                    ...prev,
+                                    username: e.target.value
+                                }))}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                value={loginForm.password}
+                                onChange={(e) => setLoginForm(prev => ({
+                                    ...prev,
+                                    password: e.target.value
+                                }))}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors disabled:bg-green-400"
+                        >
+                            {loading ? 'Signing in...' : 'Sign In'}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-4 sm:p-6 font-poppins">
