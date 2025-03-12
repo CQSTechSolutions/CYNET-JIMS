@@ -36,16 +36,16 @@ const Page = () => {
         { id: 'reelify-reel-making', name: 'Reelify: Reel Making Competition', price: 0}
     ];
 
-    const gamingEvents = [
-        {id: "Assassin-creed-shadow", name: "Assassin's Creed Shadows", price: 0},
-        {id: "bgmi-tournament", name: "BGMI Tournament", price: 0},
-        {id: "takken-7", name: "Takken 7", price: 0},
-        {id: "smash-kart", name: "Smash Kart", price: 0},
-        {id: "stumble-guys", name: "Stumble Guys", price: 0},
-        {id: "valorant-tournament", name: "Valorant Tournament", price: 0},
-        {id: "squid-games-robolox", name: "Squid Games (Robolox)", price: 0},
-        {id: "squid-games-robolox", name: "Squid Games (Robolox)", price: 0},
-    ]
+    // const gamingEvents = [
+    //     {id: "Assassin-creed-shadow", name: "Assassin's Creed Shadows", price: 0},
+    //     {id: "bgmi-tournament", name: "BGMI Tournament", price: 0},
+    //     {id: "takken-7", name: "Takken 7", price: 0},
+    //     {id: "smash-kart", name: "Smash Kart", price: 0},
+    //     {id: "stumble-guys", name: "Stumble Guys", price: 0},
+    //     {id: "valorant-tournament", name: "Valorant Tournament", price: 0},
+    //     {id: "squid-games-robolox", name: "Squid Games (Robolox)", price: 0},
+    //     {id: "squid-games-robolox", name: "Squid Games (Robolox)", price: 0},
+    // ]
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
