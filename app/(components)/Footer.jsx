@@ -81,12 +81,17 @@ const Footer = () => {
                             </p>
                             <p className="text-gray-400">
                                 <a href="tel:+911234567890" className="hover:text-white transition-colors">
-                                    +91 123 456 7890
+                                    +91 7011880354
                                 </a>
                             </p>
                             <p className="text-gray-400">
-                                <a href="mailto:info@cynet.com" className="hover:text-white transition-colors">
-                                    info@cynet.com
+                                <a href="tel:+911234567890" className="hover:text-white transition-colors">
+                                    +91 8920900097
+                                </a>
+                            </p>
+                            <p className="text-gray-400">
+                                <a href="mailto:itclub.vk@jimsd.org" className="hover:text-white transition-colors">
+                                itclub.vk@jimsd.org
                                 </a>
                             </p>
                         </div>
