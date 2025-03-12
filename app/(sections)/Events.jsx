@@ -5,7 +5,7 @@ import Image from 'next/image'
 const Events = () => {
     
     return (
-        <div className='w-screen min-h-auto bg-[#1A0F0F] py-8'>
+        <div className='w-screen min-h-auto bg-[#1A0F0F] py-8' id='events'>
             <h1 className='text-white text-center py-4 mb-2 font-monot text-3xl sm:text-4xl md:text-5xl'>Events</h1>
             
             {/* Mobile View - Image */}
