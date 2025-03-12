@@ -1,6 +1,7 @@
 import React from 'react'
 import ComingSoon from '../(components)/ComingSoon'
 import Navbar from '../(components)/Navbar'
+import Footer from '../(components)/Footer'
 
 const page = () => {
     return (
@@ -39,6 +40,7 @@ const page = () => {
         //     </div>
         // </div>
         <ComingSoon />
+        // <Footer />
     )
 }
 

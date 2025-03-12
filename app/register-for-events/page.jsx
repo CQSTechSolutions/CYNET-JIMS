@@ -5,6 +5,7 @@ import { registerForEvents } from '@/actions/registration.action';
 import ComingSoon from '../(components)/ComingSoon';
 import Image from 'next/image';
 import { CldUploadWidget } from 'next-cloudinary';
+import Navbar from '../(components)/Navbar';
 
 const Page = () => {
     const [formData, setFormData] = useState({
@@ -141,6 +142,7 @@ const Page = () => {
 
     return (
         <>
+        <Navbar/>
         <div className="min-h-screen bg-green-800 py-12 px-4 sm:px-6 lg:px-8 font-poppins select-none">
             <div className="max-w-3xl mx-auto">
                 {/* Header Section */}
