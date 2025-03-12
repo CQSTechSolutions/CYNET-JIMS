@@ -44,6 +44,7 @@ try {
       type: String,
       required: [true, 'Transaction ID is required'],
       trim: true,
+      unique: true,
     },
     semester: {
       type: String,
