@@ -121,4 +121,29 @@ export async function updateRegistrationStatus(registrationId, status) {
             error: 'Failed to update status' 
         };
     }
+}
+
+// Add the verify admin function
+export async function verifyAdmin(credentials) {
+    try {
+        const adminUsername = process.env.ADMIN_EMAIL;
+        const adminPassword = process.env.ADMIN_PASSWORD;
+
+        if (!adminUsername || !adminPassword) {
+            console.error('Admin credentials not configured');
+            return { success: false };
+        }
+        // console.log(credentials);
+        // console.log(adminUsername, adminPassword);
+
+        if (credentials.username === adminUsername && 
+            credentials.password === adminPassword) {
+            return { success: true };
+        }
+
+        return { success: false };
+    } catch (error) {
+        console.error('Authentication error:', error);
+        return { success: false };
+    }
 } 
