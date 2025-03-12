@@ -28,17 +28,24 @@ const Page = () => {
     });
 
     const events = [
-        { id: 'innovision-6', name: 'Innovision 6', price: 299 },
-        { id: 'ai-design-sprint', name: 'AI Poster Making', price: 99 },
-        { id: 'hack-the-hunt', name: 'Hack The Hunt', price: 199 },
-        { id: 'gamexcite-valorant', name: 'GameXcite - Valorant', price: 499 },
-        { id: 'gamexcite-bgmi', name: 'GameXcite - BGMI', price: 299 },
-        { id: 'gamexcite-fifa', name: 'GameXcite - FIFA 24', price: 299 },
-        { id: 'gamexcite-rocket-league', name: 'GameXcite - Rocket League', price: 299 },
-        { id: 'byete-beyond', name: 'Byete Beyond', price: 199 },
-        { id: 'green-pixel', name: 'Green Pixel', price: 149 },
-        { id: 'green-tech-quest', name: 'Green Tech Quest', price: 199 }
+        { id: 'innovision-6', name: 'Innovision 6', price: 0 },
+        { id: 'gen-ai-poster-makin', name: 'Gen AI Poster Making', price: 0 },
+        { id: 'techno-treasure', name: 'Techno Treasure', price: 200 },
+        { id: 'ux-marvels', name: 'UX Marvels: Figma UI Challenge', price: 0 },
+        { id: 'techwiz-green-tech-quest', name: 'Techwiz: Green Tech Quest', price: 0 },
+        { id: 'reelify-reel-making', name: 'Reelify: Reel Making Competition', price: 0}
     ];
+
+    const gamingEvents = [
+        {id: "Assassin-creed-shadow", name: "Assassin's Creed Shadows", price: 0},
+        {id: "bgmi-tournament", name: "BGMI Tournament", price: 0},
+        {id: "takken-7", name: "Takken 7", price: 0},
+        {id: "smash-kart", name: "Smash Kart", price: 0},
+        {id: "stumble-guys", name: "Stumble Guys", price: 0},
+        {id: "valorant-tournament", name: "Valorant Tournament", price: 0},
+        {id: "squid-games-robolox", name: "Squid Games (Robolox)", price: 0},
+        {id: "squid-games-robolox", name: "Squid Games (Robolox)", price: 0},
+    ]
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
