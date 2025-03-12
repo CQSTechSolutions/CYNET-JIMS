@@ -42,8 +42,10 @@ try {
     },
     transactionId: {
       type: String,
-      required: [true, 'Transaction ID is required'],
-      trim: true,
+      // required: [true, 'Transaction ID is required'],
+      required: false,
+      default: "trasaction_id"
+      // trim: true,
     },
     semester: {
       type: String,
