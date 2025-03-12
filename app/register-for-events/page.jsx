@@ -143,7 +143,7 @@ const Page = () => {
     return (
         <div className="overflow-x-hidden">
         <Navbar/>
-        <div className="min-h-screen overflow-x-hidden bg-green-800 py-12 px-4 sm:px-6 lg:px-8 font-poppins select-none">
+        <div className="min-h-screen pt-36 overflow-x-hidden bg-green-800 py-12 px-4 sm:px-6 lg:px-8 font-poppins select-none">
             <div className="max-w-3xl mx-auto">
                 {/* Header Section */}
                 <div className="text-center mb-8">
