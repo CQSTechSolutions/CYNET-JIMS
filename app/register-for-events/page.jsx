@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Footer from '../(components)/Footer';
 import { registerForEvents } from '@/actions/registration.action';
 import ComingSoon from '../(components)/ComingSoon';
+import Image from 'next/image';
+import { CldUploadWidget } from 'next-cloudinary';
 
 const Page = () => {
     const [formData, setFormData] = useState({
@@ -13,23 +15,28 @@ const Page = () => {
         enrollmentNumber: '',
         transactionId: '',
         semester: '',
-        events: []
+        payment_ss: '',
+        events: [],
+        totalPayable: 0
     });
     
     const [status, setStatus] = useState({
         message: '',
-        type: '', // 'success' or 'error'
+        type: '', 
         isSubmitting: false
     });
 
     const events = [
-        { id: 'innovision-6', name: 'Innovision 6' },
-        { id: 'ai-design-sprint', name: 'AI Design Sprint' },
-        { id: 'hack-the-hunt', name: 'Hack The Hunt' },
-        { id: 'gamexcite', name: 'GameXcite' },
-        { id: 'byete-beyond', name: 'Byete Beyond' },
-        { id: 'green-pixel', name: 'Green Pixel' },
-        { id: 'green-tech-quest', name: 'Green Tech Quest' }
+        { id: 'innovision-6', name: 'Innovision 6', price: 299 },
+        { id: 'ai-design-sprint', name: 'AI Poster Making', price: 99 },
+        { id: 'hack-the-hunt', name: 'Hack The Hunt', price: 199 },
+        { id: 'gamexcite-valorant', name: 'GameXcite - Valorant', price: 499 },
+        { id: 'gamexcite-bgmi', name: 'GameXcite - BGMI', price: 299 },
+        { id: 'gamexcite-fifa', name: 'GameXcite - FIFA 24', price: 299 },
+        { id: 'gamexcite-rocket-league', name: 'GameXcite - Rocket League', price: 299 },
+        { id: 'byete-beyond', name: 'Byete Beyond', price: 199 },
+        { id: 'green-pixel', name: 'Green Pixel', price: 149 },
+        { id: 'green-tech-quest', name: 'Green Tech Quest', price: 199 }
     ];
 
     const handleChange = (e) => {
@@ -42,7 +49,17 @@ const Page = () => {
                         ? [...prev.events, value]
                         : prev.events.filter(event => event !== value);
                     
-                    return { ...prev, events: updatedEvents };
+                    // Calculate total payable amount based on selected events
+                    const totalAmount = updatedEvents.reduce((sum, eventId) => {
+                        const event = events.find(e => e.id === eventId);
+                        return sum + (event ? event.price : 0);
+                    }, 0);
+
+                    return { 
+                        ...prev, 
+                        events: updatedEvents,
+                        totalPayable: totalAmount 
+                    };
                 });
             }
         } else {
@@ -57,8 +74,18 @@ const Page = () => {
         e.preventDefault();
         setStatus({ message: '', type: '', isSubmitting: true });
         
+        // Validate required fields
+        if (!formData.payment_ss) {
+            setStatus({
+                message: 'Please upload your payment screenshot before submitting',
+                type: 'error',
+                isSubmitting: false
+            });
+            return;
+        }
+        
         try {
-            // Create FormData object to pass to the server action
+            
             const formDataObj = new FormData();
             formDataObj.append('name', formData.name);
             formDataObj.append('email', formData.email);
@@ -67,13 +94,13 @@ const Page = () => {
             formDataObj.append('enrollmentNumber', formData.enrollmentNumber);
             formDataObj.append('transactionId', formData.transactionId);
             formDataObj.append('semester', formData.semester);
+            formDataObj.append('payment_ss', formData.payment_ss);
+            formDataObj.append('totalPayable', formData.totalPayable.toString());
             
-            // Add each selected event
             formData.events.forEach(event => {
                 formDataObj.append('events', event);
             });
             
-            // Call the server action
             const result = await registerForEvents(formDataObj);
             
             if (result.success) {
@@ -91,7 +118,9 @@ const Page = () => {
                     enrollmentNumber: '',
                     transactionId: '',
                     semester: '',
-                    events: []
+                    payment_ss: '',
+                    events: [],
+                    totalPayable: 0
                 });
             } else {
                 setStatus({
@@ -198,17 +227,7 @@ const Page = () => {
         //                             />
         //                         </div>
 
-        //                         <div>
-        //                             <label className="block text-sm font-medium text-green-700 mb-1">Transaction ID</label>
-        //                             <input
-        //                                 type="text"
-        //                                 name="transactionId"
-        //                                 value={formData.transactionId}
-        //                                 required
-        //                                 className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
-        //                                 onChange={handleChange}
-        //                             />
-        //                         </div>
+   
 
         //                         <div>
         //                             <label className="block text-sm font-medium text-green-700 mb-1">Semester</label>
@@ -249,25 +268,89 @@ const Page = () => {
         //                                     className="h-5 w-5 text-green-600 border-green-500 rounded mt-1"
         //                                 />
         //                                 <label htmlFor={event.id} className="ml-3 text-sm text-gray-700">
-        //                                     {event.name}
+        //                                     {event.name} - ₹{event.price}
         //                                 </label>
         //                             </div>
         //                         ))}
         //                     </div>
-        //                     {formData.events.length === 0 && (
+        //                     {formData.events.length === 0 ? (
         //                         <p className="text-sm text-red-500">Please select at least one event</p>
+        //                     ) : (
+        //                         <p className="text-lg font-semibold text-green-700">Total Amount to Pay: ₹{formData.totalPayable}</p>
         //                     )}
         //                 </div>
+        //                 <div className="bg-green-500 p-2 w-max rounded-sm mx-auto">
+        //                     <Image src="/payment_qr.jpeg" alt="payment_qr" width={200} height={200} />
+        //                 </div>
+        //                 <div className="flex w-full items-center justify-between">
 
-        //                 <div className="pt-6">
+        //                 <div>
+        //                             <label className="block text-sm font-medium text-green-700 mb-1">Transaction ID</label>
+        //                             <input
+        //                                 type="text"
+        //                                 name="transactionId"
+        //                                 value={formData.transactionId}
+        //                                 required
+        //                                 className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
+        //                                 onChange={handleChange}
+        //                             />
+        //                         </div>
+        //                 <CldUploadWidget 
+        //                     uploadPreset="Cynet2025"
+        //                     onSuccess={(result, widget) => {
+        //                         try {
+        //                             if (result.event === "success") {
+        //                                 setFormData(prev => ({
+        //                                     ...prev,
+        //                                     payment_ss: result.info.public_id
+        //                                 }));
+        //                                 setStatus({
+        //                                     message: 'Payment screenshot uploaded successfully!',
+        //                                     type: 'success',
+        //                                     isSubmitting: false
+        //                                 });
+        //                             }
+        //                         } catch (error) {
+        //                             console.error('Upload error:', error);
+        //                             setStatus({
+        //                                 message: 'Failed to upload payment screenshot. Please try again.',
+        //                                 type: 'error',
+        //                                 isSubmitting: false
+        //                             });
+        //                         }
+        //                     }}
+        //                     onError={(error) => {
+        //                         console.error('Upload error:', error);
+        //                         setStatus({
+        //                             message: 'Failed to upload payment screenshot. Please try again.',
+        //                             type: 'error',
+        //                             isSubmitting: false
+        //                         });
+        //                     }}
+        //                 >
+        //                     {({ open }) => {
+        //                         return (
+        //                             <button 
+        //                                 type="button"
+        //                                 onClick={() => open()}
+        //                                 className="cursor-pointer w-max bg-green-100 text-green-700 py-3 px-4 rounded-md font-medium hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 mt-[1.5vw]"
+        //                             >
+        //                                 {formData.payment_ss ? 'Change Payment Screenshot' : 'Upload Payment Screenshot'}
+        //                             </button>
+        //                         );
+        //                     }}
+        //                 </CldUploadWidget>
+        //                 </div>
+        //                 <div className="">
         //                     <button
         //                         type="submit"
-        //                         disabled={status.isSubmitting || formData.events.length === 0}
+        //                         disabled={status.isSubmitting || formData.events.length === 0 || !formData.payment_ss}
         //                         className="w-full cursor-pointer bg-green-600 text-white py-3 px-4 rounded-md font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
         //                     >
         //                         {status.isSubmitting ? 'Submitting...' : 'Complete Registration'}
         //                     </button>
         //                 </div>
+                     
         //             </form>
         //         </div>
         //     </div>

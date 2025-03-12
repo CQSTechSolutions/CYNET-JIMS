@@ -23,6 +23,7 @@ try {
       trim: true,
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email'],
+      unique: true, 
     },
     phone: {
       type: String,
@@ -48,15 +49,24 @@ try {
       type: String,
       required: [true, 'Semester is required'],
     },
+    payment_ss: {
+      type: String,
+      required: [true, 'Please Upload the Payment Screenshot']
+    },
     events: {
       type: [String],
       required: [true, 'At least one event must be selected'],
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+    totalPayable: {
+      type: Number,
+      required: [true, 'Total payable amount is required'],
     },
-  });
+    status: {
+      type: String,
+      enum: ['pending', 'verified', 'rejected'],
+      default: 'pending'
+    }
+  },{timestamps: true});
 
   Registration = mongoose.model('Registration', RegistrationSchema);
 }
@@ -66,7 +76,6 @@ export async function registerForEvents(formData) {
     // Connect to the database
     await connectDB();
 
-    // Extract form data
     const name = formData.get('name');
     const email = formData.get('email');
     const phone = formData.get('phone');
@@ -74,19 +83,42 @@ export async function registerForEvents(formData) {
     const enrollmentNumber = formData.get('enrollmentNumber');
     const transactionId = formData.get('transactionId');
     const semester = formData.get('semester');
+    const payment_ss = formData.get('payment_ss');
+    const totalPayable = formData.get('totalPayable');
     
-    // Handle events (could be multiple selections)
     let events = formData.getAll('events');
     
     // Validate required fields
-    if (!name || !email || !phone || !college || !enrollmentNumber || !transactionId || !semester || !events.length) {
+    if (!name || !email || !phone || !college || !enrollmentNumber || !transactionId || !semester || !payment_ss || !events.length) {
       return {
         success: false,
-        message: 'All fields are required. Please ensure you have selected at least one event.',
+        message: 'All fields are required. Please ensure you have selected at least one event and uploaded payment proof.',
       };
     }
 
-    // Create a new registration
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    if (!emailRegex.test(email)) {
+      return {
+        success: false,
+        message: 'Please enter a valid email address.',
+      };
+    }
+
+    if (phone.length < 10) {
+      return {
+        success: false,
+        message: 'Please enter a valid phone number.',
+      };
+    }
+
+    const existingRegistration = await Registration.findOne({ email });
+    if (existingRegistration) {
+      return {
+        success: false,
+        message: 'This email has already been registered. Please use a different email or contact support.',
+      };
+    }
+
     const registration = new Registration({
       name,
       email,
@@ -95,13 +127,13 @@ export async function registerForEvents(formData) {
       enrollmentNumber,
       transactionId,
       semester,
+      payment_ss,
       events,
+      totalPayable: Number(totalPayable),
     });
 
-    // Save to database
     await registration.save();
 
-    // Revalidate the page to show updated data
     revalidatePath('/register-for-events');
 
     return {
