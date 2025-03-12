@@ -148,226 +148,226 @@ const Page = () => {
     };
 
     return (
-        <div className="overflow-x-hidden">
-        <Navbar/>
-        <div className="min-h-screen pt-36 overflow-x-hidden bg-green-800 py-12 px-4 sm:px-6 lg:px-8 font-poppins select-none">
-            <div className="max-w-3xl mx-auto">
-                {/* Header Section */}
-                <div className="text-center mb-8">
-                    <h1 className="text-4xl text-white mb-2 font-monot">Event Registration</h1>
-                    <p className="text-lg text-white">Join us in creating a sustainable future through technology</p>
-                </div>
+        // <div className="overflow-x-hidden">
+        // <Navbar/>
+        // <div className="min-h-screen pt-36 overflow-x-hidden bg-green-800 py-12 px-4 sm:px-6 lg:px-8 font-poppins select-none">
+        //     <div className="max-w-3xl mx-auto">
+        //         {/* Header Section */}
+        //         <div className="text-center mb-8">
+        //             <h1 className="text-4xl text-white mb-2 font-monot">Event Registration</h1>
+        //             <p className="text-lg text-white">Join us in creating a sustainable future through technology</p>
+        //         </div>
 
-                {/* Status Message */}
-                {status.message && (
-                    <div className={`mb-6 p-4 rounded-md ${status.type ===   'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                        {status.message}
-                    </div>
-                )}
+        //         {/* Status Message */}
+        //         {status.message && (
+        //             <div className={`mb-6 p-4 rounded-md ${status.type ===   'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+        //                 {status.message}
+        //             </div>
+        //         )}
 
-                {/* Main Form Card */}
-                <div className="bg-white rounded-sm shadow-lg p-8 border border-green-100">
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        {/* Personal Information Section */}
-                        <div className="space-y-6">
-                            <h2 className="text-xl font-semibold text-green-700 pb-2 border-b border-green-200">Personal Information</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-sm font-medium text-green-700 mb-1">Full Name</label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        required
-                                        autoComplete="name"
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
-                                        onChange={handleChange}
-                                    />
-                                </div>
+        //         {/* Main Form Card */}
+        //         <div className="bg-white rounded-sm shadow-lg p-8 border border-green-100">
+        //             <form onSubmit={handleSubmit} className="space-y-6">
+        //                 {/* Personal Information Section */}
+        //                 <div className="space-y-6">
+        //                     <h2 className="text-xl font-semibold text-green-700 pb-2 border-b border-green-200">Personal Information</h2>
+        //                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        //                         <div>
+        //                             <label className="block text-sm font-medium text-green-700 mb-1">Full Name</label>
+        //                             <input
+        //                                 type="text"
+        //                                 name="name"
+        //                                 value={formData.name}
+        //                                 required
+        //                                 autoComplete="name"
+        //                                 className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
+        //                                 onChange={handleChange}
+        //                             />
+        //                         </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-green-700 mb-1">Email</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        required
-                                        autoComplete="email"
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
-                                        onChange={handleChange}
-                                    />
-                                </div>
+        //                         <div>
+        //                             <label className="block text-sm font-medium text-green-700 mb-1">Email</label>
+        //                             <input
+        //                                 type="email"
+        //                                 name="email"
+        //                                 value={formData.email}
+        //                                 required
+        //                                 autoComplete="email"
+        //                                 className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
+        //                                 onChange={handleChange}
+        //                             />
+        //                         </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-green-700 mb-1">Phone Number</label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={formData.phone}
-                                        required
-                                        autoComplete="tel"
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
-                                        onChange={handleChange}
-                                    />
-                                </div>
+        //                         <div>
+        //                             <label className="block text-sm font-medium text-green-700 mb-1">Phone Number</label>
+        //                             <input
+        //                                 type="tel"
+        //                                 name="phone"
+        //                                 value={formData.phone}
+        //                                 required
+        //                                 autoComplete="tel"
+        //                                 className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
+        //                                 onChange={handleChange}
+        //                             />
+        //                         </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-green-700 mb-1">Enrollment Number</label>
-                                    <input
-                                        type="text"
-                                        name="enrollmentNumber"
-                                        value={formData.enrollmentNumber}
-                                        required
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
-                                        onChange={handleChange}
-                                    />
-                                </div>
+        //                         <div>
+        //                             <label className="block text-sm font-medium text-green-700 mb-1">Enrollment Number</label>
+        //                             <input
+        //                                 type="text"
+        //                                 name="enrollmentNumber"
+        //                                 value={formData.enrollmentNumber}
+        //                                 required
+        //                                 className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
+        //                                 onChange={handleChange}
+        //                             />
+        //                         </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-green-700 mb-1">College/University</label>
-                                    <input
-                                        type="text"
-                                        name="college"
-                                        value={formData.college}
-                                        required
-                                        autoComplete="organization"
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
-                                        onChange={handleChange}
-                                    />
-                                </div>
+        //                         <div>
+        //                             <label className="block text-sm font-medium text-green-700 mb-1">College/University</label>
+        //                             <input
+        //                                 type="text"
+        //                                 name="college"
+        //                                 value={formData.college}
+        //                                 required
+        //                                 autoComplete="organization"
+        //                                 className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
+        //                                 onChange={handleChange}
+        //                             />
+        //                         </div>
 
    
 
-                                <div>
-                                    <label className="block text-sm font-medium text-green-700 mb-1">Semester</label>
-                                    <select
-                                        name="semester"
-                                        value={formData.semester}
-                                        required
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">Select Semester</option>
-                                        <option value="1">1st Semester</option>
-                                        <option value="2">2nd Semester</option>
-                                        <option value="3">3rd Semester</option>
-                                        <option value="4">4th Semester</option>
-                                        <option value="5">5th Semester</option>
-                                        <option value="6">6th Semester</option>
-                                        <option value="7">7th Semester</option>
-                                        <option value="8">8th Semester</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+        //                         <div>
+        //                             <label className="block text-sm font-medium text-green-700 mb-1">Semester</label>
+        //                             <select
+        //                                 name="semester"
+        //                                 value={formData.semester}
+        //                                 required
+        //                                 className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
+        //                                 onChange={handleChange}
+        //                             >
+        //                                 <option value="">Select Semester</option>
+        //                                 <option value="1">1st Semester</option>
+        //                                 <option value="2">2nd Semester</option>
+        //                                 <option value="3">3rd Semester</option>
+        //                                 <option value="4">4th Semester</option>
+        //                                 <option value="5">5th Semester</option>
+        //                                 <option value="6">6th Semester</option>
+        //                                 <option value="7">7th Semester</option>
+        //                                 <option value="8">8th Semester</option>
+        //                             </select>
+        //                         </div>
+        //                     </div>
+        //                 </div>
 
-                        {/* Event Selection Section */}
-                        <div className="space-y-6">
-                            <h2 className="text-xl font-semibold text-green-700 pb-2 border-b border-green-200">Event Selection</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {events.map(event => (
-                                    <div key={event.id} className="flex items-start">
-                                        <input
-                                            id={event.id}
-                                            name="events"
-                                            type="checkbox"
-                                            value={event.id}
-                                            checked={formData.events.includes(event.id)}
-                                            onChange={handleChange}
-                                            className="h-5 w-5 text-green-600 border-green-500 rounded mt-1"
-                                        />
-                                        <label htmlFor={event.id} className="ml-3 text-sm text-gray-700">
-                                            {event.name}
-                                        </label>
-                                    </div>
-                                ))}
-                            </div>
-                            {formData.events.length === 0 ? (
-                                <p className="text-sm text-red-500">Please select at least one event</p>
-                            ) : (
-                                <p className="text-lg font-semibold text-green-700">Total Amount to Pay: ₹{formData.totalPayable}</p>
-                            )}
-                        </div>
-                        <div className="bg-green-500 p-2 w-max rounded-sm mx-auto">
-                            <Image src="/payment_qr.jpeg" alt="payment_qr" width={200} height={200} />
-                        </div>
-                        <div className="flex w-full items-center justify-between">
+        //                 {/* Event Selection Section */}
+        //                 <div className="space-y-6">
+        //                     <h2 className="text-xl font-semibold text-green-700 pb-2 border-b border-green-200">Event Selection</h2>
+        //                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        //                         {events.map(event => (
+        //                             <div key={event.id} className="flex items-start">
+        //                                 <input
+        //                                     id={event.id}
+        //                                     name="events"
+        //                                     type="checkbox"
+        //                                     value={event.id}
+        //                                     checked={formData.events.includes(event.id)}
+        //                                     onChange={handleChange}
+        //                                     className="h-5 w-5 text-green-600 border-green-500 rounded mt-1"
+        //                                 />
+        //                                 <label htmlFor={event.id} className="ml-3 text-sm text-gray-700">
+        //                                     {event.name}
+        //                                 </label>
+        //                             </div>
+        //                         ))}
+        //                     </div>
+        //                     {formData.events.length === 0 ? (
+        //                         <p className="text-sm text-red-500">Please select at least one event</p>
+        //                     ) : (
+        //                         <p className="text-lg font-semibold text-green-700">Total Amount to Pay: ₹{formData.totalPayable}</p>
+        //                     )}
+        //                 </div>
+        //                 <div className="bg-green-500 p-2 w-max rounded-sm mx-auto">
+        //                     <Image src="/payment_qr.jpeg" alt="payment_qr" width={200} height={200} />
+        //                 </div>
+        //                 <div className="flex w-full items-center justify-between">
 
-                        {/* <div>
-                                    <label className="block text-sm font-medium text-green-700 mb-1">Transaction ID</label>
-                                    <input
-                                        type="text"
-                                        name="transactionId"
-                                        value={formData.transactionId}
-                                        required
-                                        className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
-                                        onChange={handleChange}
-                                    />
-                                </div> */}
-                        <CldUploadWidget 
-                            uploadPreset="Cynet2025"
-                            onSuccess={(result, widget) => {
-                                try {
-                                    if (result.event === "success") {
-                                        setFormData(prev => ({
-                                            ...prev,
-                                            payment_ss: result.info.secure_url
-                                        }));
-                                        setStatus({
-                                            message: 'Payment screenshot uploaded successfully!',
-                                            type: 'success',
-                                            isSubmitting: false
-                                        });
-                                    }
-                                } catch (error) {
-                                    console.error('Upload error:', error);
-                                    setStatus({
-                                        message: 'Failed to upload payment screenshot. Please try again.',
-                                        type: 'error',
-                                        isSubmitting: false
-                                    });
-                                }
-                            }}
-                            onError={(error) => {
-                                console.error('Upload error:', error);
-                                setStatus({
-                                    message: 'Failed to upload payment screenshot. Please try again.',
-                                    type: 'error',
-                                    isSubmitting: false
-                                });
-                            }}
-                        >
-                            {({ open }) => {
-                                return (
-                                    <button 
-                                        type="button"
-                                        onClick={() => open()}
-                                        className="cursor-pointer w-max bg-green-100 text-green-700 py-3 px-4 rounded-md font-medium hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 mt-[1.5vw]"
-                                    >
-                                        {formData.payment_ss ? 'Change Payment Screenshot' : 'Upload Payment Screenshot'}
-                                    </button>
-                                );
-                            }}
-                        </CldUploadWidget>
-                        </div>
+        //                 {/* <div>
+        //                             <label className="block text-sm font-medium text-green-700 mb-1">Transaction ID</label>
+        //                             <input
+        //                                 type="text"
+        //                                 name="transactionId"
+        //                                 value={formData.transactionId}
+        //                                 required
+        //                                 className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
+        //                                 onChange={handleChange}
+        //                             />
+        //                         </div> */}
+        //                 <CldUploadWidget 
+        //                     uploadPreset="Cynet2025"
+        //                     onSuccess={(result, widget) => {
+        //                         try {
+        //                             if (result.event === "success") {
+        //                                 setFormData(prev => ({
+        //                                     ...prev,
+        //                                     payment_ss: result.info.secure_url
+        //                                 }));
+        //                                 setStatus({
+        //                                     message: 'Payment screenshot uploaded successfully!',
+        //                                     type: 'success',
+        //                                     isSubmitting: false
+        //                                 });
+        //                             }
+        //                         } catch (error) {
+        //                             console.error('Upload error:', error);
+        //                             setStatus({
+        //                                 message: 'Failed to upload payment screenshot. Please try again.',
+        //                                 type: 'error',
+        //                                 isSubmitting: false
+        //                             });
+        //                         }
+        //                     }}
+        //                     onError={(error) => {
+        //                         console.error('Upload error:', error);
+        //                         setStatus({
+        //                             message: 'Failed to upload payment screenshot. Please try again.',
+        //                             type: 'error',
+        //                             isSubmitting: false
+        //                         });
+        //                     }}
+        //                 >
+        //                     {({ open }) => {
+        //                         return (
+        //                             <button 
+        //                                 type="button"
+        //                                 onClick={() => open()}
+        //                                 className="cursor-pointer w-max bg-green-100 text-green-700 py-3 px-4 rounded-md font-medium hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 mt-[1.5vw]"
+        //                             >
+        //                                 {formData.payment_ss ? 'Change Payment Screenshot' : 'Upload Payment Screenshot'}
+        //                             </button>
+        //                         );
+        //                     }}
+        //                 </CldUploadWidget>
+        //                 </div>
                             
-                        <div className="">
-                            <button
-                                type="submit"
-                                disabled={status.isSubmitting || formData.events.length === 0 || !formData.payment_ss}
-                                className="w-full cursor-pointer bg-green-600 text-white py-3 px-4 rounded-md font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                            >
-                                {status.isSubmitting ? 'Submitting...' : 'Complete Registration'}
-                            </button>
-                        </div>
+        //                 <div className="">
+        //                     <button
+        //                         type="submit"
+        //                         disabled={status.isSubmitting || formData.events.length === 0 || !formData.payment_ss}
+        //                         className="w-full cursor-pointer bg-green-600 text-white py-3 px-4 rounded-md font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        //                     >
+        //                         {status.isSubmitting ? 'Submitting...' : 'Complete Registration'}
+        //                     </button>
+        //                 </div>
                      
-                    </form>
-                </div>
-            </div>
-        </div>
-        <Footer />
-        </div>
-        // <ComingSoon />
+        //             </form>
+        //         </div>
+        //     </div>
+        // </div>
+        // <Footer />
+        // </div>
+        <ComingSoon />
     );
 };
 
