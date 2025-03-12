@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Cynet",
+  title: "Cynet - IT Fest of JIMS VK",
   description: "Biggest IT Fest of GGSIPU.",
 };
 

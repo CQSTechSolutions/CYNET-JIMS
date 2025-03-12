@@ -1,0 +1,339 @@
+'use client'
+import { useState, useEffect } from 'react';
+import { CldImage } from 'next-cloudinary';
+import { FaSearch, FaFilter } from 'react-icons/fa';
+import { getRegistrations, updateRegistrationStatus } from '@/actions/admin.actions';
+
+const AdminDashboard = () => {
+    const [registrations, setRegistrations] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [selectedPayment, setSelectedPayment] = useState(null);
+    const [filters, setFilters] = useState({
+        status: 'all',
+        search: '',
+        dateRange: 'all', 
+        event: 'all',
+        college: 'all',
+        semester: 'all',
+        paymentAmount: {
+            min: '',
+            max: ''
+        },
+        sortBy: 'newest'
+    });
+
+    // Fetch registrations using server action
+    const fetchRegistrations = async () => {
+        try {
+            setError(null);
+            const result = await getRegistrations();
+            if (result?.success) {
+                setRegistrations(result.data || []);
+            } else {
+                setError(result?.error || 'Failed to fetch registrations');
+                setRegistrations([]);
+            }
+        } catch (error) {
+            setError(error?.message || 'An unexpected error occurred');
+            setRegistrations([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchRegistrations();
+    }, []);
+
+    // Handle status change using server action
+    const handleStatusChange = async (registrationId, newStatus) => {
+        try {
+            const result = await updateRegistrationStatus(registrationId, newStatus);
+            if (result?.success) {
+                setRegistrations(prev => 
+                    prev.map(reg => 
+                        reg._id === registrationId 
+                            ? { ...reg, status: newStatus }
+                            : reg
+                    )
+                );
+                setSelectedPayment(null);
+            } else {
+                console.error('Failed to update status:', result?.error);
+            }
+        } catch (error) {
+            console.error('Error updating status:', error?.message || 'An unexpected error occurred');
+        }
+    };
+
+    const filteredRegistrations = registrations.filter(reg => {
+        const matchesSearch = reg.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+                            reg.email.toLowerCase().includes(filters.search.toLowerCase()) ||
+                            reg.college.toLowerCase().includes(filters.search.toLowerCase()) ||
+                            reg.transactionId.toLowerCase().includes(filters.search.toLowerCase());
+        
+        const matchesStatus = filters.status === 'all' || reg.status === filters.status;
+        const matchesEvent = filters.event === 'all' || reg.events.includes(filters.event);
+        const matchesCollege = filters.college === 'all' || reg.college === filters.college;
+        const matchesSemester = filters.semester === 'all' || reg.semester === filters.semester;
+        
+        const matchesPaymentAmount = (!filters.paymentAmount.min || reg.totalPayable >= Number(filters.paymentAmount.min)) &&
+                                   (!filters.paymentAmount.max || reg.totalPayable <= Number(filters.paymentAmount.max));
+
+        return matchesSearch && matchesStatus && matchesEvent && matchesCollege && matchesSemester && matchesPaymentAmount;
+    }).sort((a, b) => {
+        switch(filters.sortBy) {
+            case 'newest':
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            case 'oldest':
+                return new Date(a.createdAt) - new Date(b.createdAt);
+            case 'amountHighToLow':
+                return b.totalPayable - a.totalPayable;
+            case 'amountLowToHigh':
+                return a.totalPayable - b.totalPayable;
+            default:
+                return 0;
+        }
+    });
+
+    const uniqueColleges = [...new Set(registrations.map(reg => reg.college))];
+    const uniqueSemesters = [...new Set(registrations.map(reg => reg.semester))];
+
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-4 sm:p-6 font-poppins">
+            {selectedPayment && (
+                <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="bg-white p-6 rounded-2xl w-full max-w-2xl shadow-xl">
+                        <div className="relative w-full h-48 sm:h-96 mb-6">
+                            <CldImage
+                                fill
+                                src={selectedPayment.payment_ss}
+                                alt="Payment Screenshot"
+                                className="rounded-xl object-contain"
+                            />
+                        </div>
+                        <p className="text-center mb-6 text-gray-700 font-medium">
+                            Transaction ID: {selectedPayment.transactionId}
+                        </p>
+                        <div className="flex flex-col sm:flex-row justify-center gap-3">
+                            <button
+                                onClick={() => handleStatusChange(selectedPayment._id, 'verified')}
+                                className="px-6 py-2.5 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all shadow-md hover:shadow-lg"
+                            >
+                                Approve
+                            </button>
+                            <button
+                                onClick={() => handleStatusChange(selectedPayment._id, 'rejected')}
+                                className="px-6 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-md hover:shadow-lg"
+                            >
+                                Reject
+                            </button>
+                            <button
+                                onClick={() => setSelectedPayment(null)}
+                                className="px-6 py-2.5 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all shadow-md hover:shadow-lg"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            <div className="max-w-7xl mx-auto">
+                <h1 className="text-3xl sm:text-4xl font-bold text-green-800 mb-8">Registration Dashboard</h1>
+
+                {error && (
+                    <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg mb-6">
+                        <strong className="font-medium">Error: </strong>
+                        <span>{error}</span>
+                    </div>
+                )}
+
+                {/* Advanced Filters Section */}
+                <div className="bg-white p-6 rounded-xl shadow-lg mb-8 space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="flex items-center bg-green-50 rounded-lg px-4 py-2.5">
+                            <FaSearch className="text-green-500" />
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                className="ml-3 bg-transparent focus:outline-none w-full text-green-800 placeholder-green-400"
+                                value={filters.search}
+                                onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
+                            />
+                        </div>
+
+                        <select
+                            className="px-4 py-2.5 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            value={filters.status}
+                            onChange={(e) => setFilters(prev => ({ ...prev, status: e.target.value }))}
+                        >
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="verified">Verified</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+
+                        <select
+                            className="px-4 py-2.5 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            value={filters.event}
+                            onChange={(e) => setFilters(prev => ({ ...prev, event: e.target.value }))}
+                        >
+                            <option value="all">All Events</option>
+                            <option value="innovision-6">Innovision 6</option>
+                            <option value="ai-design-sprint">AI Poster Making</option>
+                            <option value="hack-the-hunt">Hack The Hunt</option>
+                        </select>
+
+                        <select
+                            className="px-4 py-2.5 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            value={filters.college}
+                            onChange={(e) => setFilters(prev => ({ ...prev, college: e.target.value }))}
+                        >
+                            <option value="all">All Colleges</option>
+                            {uniqueColleges.map(college => (
+                                <option key={college} value={college}>{college}</option>
+                            ))}
+                        </select>
+
+                        <select
+                            className="px-4 py-2.5 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            value={filters.semester}
+                            onChange={(e) => setFilters(prev => ({ ...prev, semester: e.target.value }))}
+                        >
+                            <option value="all">All Semesters</option>
+                            {uniqueSemesters.map(semester => (
+                                <option key={semester} value={semester}>Semester {semester}</option>
+                            ))}
+                        </select>
+
+                        <div className="flex gap-3 items-center">
+                            <input
+                                type="number"
+                                placeholder="Min"
+                                className="px-4 py-2.5 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent w-full"
+                                value={filters.paymentAmount.min}
+                                onChange={(e) => setFilters(prev => ({ 
+                                    ...prev, 
+                                    paymentAmount: {...prev.paymentAmount, min: e.target.value}
+                                }))}
+                            />
+                            <input
+                                type="number"
+                                placeholder="Max"
+                                className="px-4 py-2.5 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent w-full"
+                                value={filters.paymentAmount.max}
+                                onChange={(e) => setFilters(prev => ({ 
+                                    ...prev, 
+                                    paymentAmount: {...prev.paymentAmount, max: e.target.value}
+                                }))}
+                            />
+                        </div>
+
+                        <select
+                            className="px-4 py-2.5 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            value={filters.sortBy}
+                            onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value }))}
+                        >
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="amountHighToLow">Amount (High to Low)</option>
+                            <option value="amountLowToHigh">Amount (Low to High)</option>
+                        </select>
+                    </div>
+                </div>
+
+                {/* Registrations Table */}
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <table className="min-w-full divide-y divide-green-100">
+                        <thead className="bg-green-50">
+                            <tr>
+                                <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">User</th>
+                                <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Events</th>
+                                <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Payment</th>
+                                <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Status</th>
+                                <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-green-100">
+                            {loading ? (
+                                <tr>
+                                    <td colSpan="5" className="px-6 py-4 text-center text-green-600">Loading...</td>
+                                </tr>
+                            ) : filteredRegistrations.length === 0 ? (
+                                <tr>
+                                    <td colSpan="5" className="px-6 py-4 text-center text-green-600">No registrations found</td>
+                                </tr>
+                            ) : filteredRegistrations.map((registration) => (
+                                <tr key={registration._id} className="hover:bg-green-50 transition-colors">
+                                    <td className="px-6 py-4">
+                                        <div className="flex flex-col">
+                                            <span className="font-medium text-green-800">{registration.name}</span>
+                                            <span className="text-sm text-green-600">{registration.email}</span>
+                                            <span className="text-sm text-green-600">{registration.phone}</span>
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <div className="flex flex-wrap gap-2">
+                                            {registration.events.map((event, index) => (
+                                                <span 
+                                                    key={index}
+                                                    className="px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full font-medium"
+                                                >
+                                                    {event}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <div className="flex flex-col gap-2">
+                                            <span className="text-green-800 font-medium">₹{registration.totalPayable}</span>
+                                            <span className="text-sm text-green-600">ID: {registration.transactionId}</span>
+                                            {registration.payment_ss && (
+                                                <div 
+                                                    className="relative w-20 h-20 cursor-pointer hover:opacity-80 transition-opacity rounded-lg overflow-hidden shadow-md"
+                                                    onClick={() => setSelectedPayment(registration)}
+                                                >
+                                                    <CldImage
+                                                        width="80"
+                                                        height="80"
+                                                        src={registration.payment_ss}
+                                                        alt="Payment Screenshot"
+                                                        className="object-cover"
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <span className={`px-3 py-1 text-xs rounded-full font-medium ${
+                                            registration.status === 'verified' ? 'bg-green-100 text-green-800' :
+                                            registration.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                                            'bg-yellow-100 text-yellow-800'
+                                        }`}>
+                                            {registration.status}
+                                        </span>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <select
+                                            className="px-3 py-2 border border-green-200 rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                            value={registration.status}
+                                            onChange={(e) => handleStatusChange(registration._id, e.target.value)}
+                                        >
+                                            <option value="pending">Pending</option>
+                                            <option value="verified">Verify</option>
+                                            <option value="rejected">Reject</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default AdminDashboard;
