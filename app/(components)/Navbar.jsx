@@ -14,13 +14,15 @@ const Navbar = () => {
         <>
             <div className={"flex items-center justify-between px-10 w-screen absolute top-2 left-0 right-0 md:left-4 md:right-auto z-10"}>
                 <div className="flex justify-center items-center">
+                    <Link href={"/"}>
                     <Image 
                         src={"/jimslogo.webp"} 
                         alt={"logo"} 
                         width={100} 
                         height={100}
                         className="w-14 h-14 md:w-[100px] md:h-[100px]" 
-                    />
+                        />
+                    </Link>
                     <Image 
                      src={"/vk2logo.png"} 
                      alt={"logo"} 

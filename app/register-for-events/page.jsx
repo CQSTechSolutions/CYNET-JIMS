@@ -141,9 +141,9 @@ const Page = () => {
     };
 
     return (
-        <>
+        <div className="overflow-x-hidden">
         <Navbar/>
-        <div className="min-h-screen bg-green-800 py-12 px-4 sm:px-6 lg:px-8 font-poppins select-none">
+        <div className="min-h-screen overflow-x-hidden bg-green-800 py-12 px-4 sm:px-6 lg:px-8 font-poppins select-none">
             <div className="max-w-3xl mx-auto">
                 {/* Header Section */}
                 <div className="text-center mb-8">
@@ -153,7 +153,7 @@ const Page = () => {
 
                 {/* Status Message */}
                 {status.message && (
-                    <div className={`mb-6 p-4 rounded-md ${status.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                    <div className={`mb-6 p-4 rounded-md ${status.type ===   'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                         {status.message}
                     </div>
                 )}
@@ -270,7 +270,7 @@ const Page = () => {
                                             className="h-5 w-5 text-green-600 border-green-500 rounded mt-1"
                                         />
                                         <label htmlFor={event.id} className="ml-3 text-sm text-gray-700">
-                                            {event.name} - ₹{event.price}
+                                            {event.name}
                                         </label>
                                     </div>
                                 ))}
@@ -286,7 +286,7 @@ const Page = () => {
                         </div>
                         <div className="flex w-full items-center justify-between">
 
-                        <div>
+                        {/* <div>
                                     <label className="block text-sm font-medium text-green-700 mb-1">Transaction ID</label>
                                     <input
                                         type="text"
@@ -296,7 +296,7 @@ const Page = () => {
                                         className="w-full p-2.5 border border-green-500 rounded-sm focus:outline-none focus:ring-0 focus:border-green-500"
                                         onChange={handleChange}
                                     />
-                                </div>
+                                </div> */}
                         <CldUploadWidget 
                             uploadPreset="Cynet2025"
                             onSuccess={(result, widget) => {
@@ -358,7 +358,7 @@ const Page = () => {
             </div>
         </div>
         <Footer />
-        </>
+        </div>
         // <ComingSoon />
     );
 };
