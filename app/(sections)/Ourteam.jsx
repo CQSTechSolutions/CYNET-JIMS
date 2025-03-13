@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer";
 
 const heads = [
   {
-    name: "Divyan Mayank",
+    name: "Divyant Mayank",
     role: "Vice President",
     position: "Core Team",
     image: "/vp2.webp",
