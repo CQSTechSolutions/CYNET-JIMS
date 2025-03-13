@@ -26,9 +26,7 @@ const Page = () => {
   return (
     <>
       <Navbar />
-      <div className="">
-        <GamingEvent event={game} />
-      </div>
+      <GamingEvent event={game} />
     </>
   );
 };

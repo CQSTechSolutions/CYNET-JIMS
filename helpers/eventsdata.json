@@ -13,32 +13,46 @@
         "Focus Area: Must address key sustainability challenges and provide innovative solutions"
       ],
       "judgingCriteria": [
-        "Innovation: Originality and creativity of the idea",
-        "Methodology: Clear approach and plan for execution",
-        "Market Potential: Ability to scale and reach the target market",
-        "Feasibility: Practicality and viability of the solution",
-        "Presentation: Quality and clarity of the pitch"
-      ],
-      "focusAreas": [
-        "Renewable Energy Innovations",
-        "Circular Economy & Waste Management",
-        "Sustainable Agriculture & Food Tech",
-        "Green Building & Smart Cities",
-        "Eco-friendly Consumer Products",
-        "AI & Data-Driven Sustainability",
-        "Water Conservation & Management",
-        "Sustainable Transportation & Mobility",
-        "Climate Change Mitigation & Adaptation"
+        {
+          "criterion": "Innovation",
+          "marks": 20,
+          "description": "Originality and creativity of the idea"
+        },
+        {
+          "criterion": "Methodology",
+          "marks": 20,
+          "description": "Clear approach and plan for execution"
+        },
+        {
+          "criterion": "Market Potential",
+          "marks": 15,
+          "description": "Ability to scale and reach the target market"
+        },
+        {
+          "criterion": "Feasibility",
+          "marks": 15,
+          "description": "Practicality and viability of the solution"
+        },
+        {
+          "criterion": "Presentation",
+          "marks": 20,
+          "description": "Quality and clarity of the pitch"
+        },
+        {
+          "criterion": "Sustainability Focus",
+          "marks": 10,
+          "description": "Alignment with green technology themes"
+        }
       ],
       "coordinators": [
         {
           "name": "Arsh",
-          "semester": "4th",
+          "year": "BCA 2nd Year",
           "contact": "8800696879"
         },
         {
           "name": "Anshika M.",
-          "semester": "6th",
+          "year": "BCA 3rd Year",
           "contact": "7303025922"
         }
       ],
@@ -48,6 +62,7 @@
       "id": "gen-ai-poster-makin",
       "name": "Gen AI Design Sprint",
       "subtitle": "Gen AI Poster Making Competition",
+      "tagline": "Unleash creativity with AI: Where imagination meets technology",
       "description": "Get ready for an exciting fusion of imagination and technology! The Gen AI Design Sprint challenges you to create visually stunning posters using the power of ChatGPT.",
       "rules": [
         "Individual Participation only",
@@ -58,17 +73,27 @@
         "Single round event"
       ],
       "judgingCriteria": [
-        "Prompts given by participants",
-        "Design of the poster"
+        {
+          "criterion": "Prompt Quality",
+          "marks": 50,
+          "description": "Effectiveness and creativity of prompts given by participants"
+        },
+        {
+          "criterion": "Design Execution",
+          "marks": 50,
+          "description": "Visual appeal and effectiveness of the final poster"
+        }
       ],
       "coordinators": [
         {
           "name": "Bhaskar Kataria",
-          "semester": "6th"
+          "year": "BCA 3rd Year",
+          "contact": ""
         },
         {
           "name": "Pranav Kumar",
-          "semester": "6th"
+          "year": "BCA 3rd Year",
+          "contact": ""
         }
       ],
       "price": 0
@@ -83,19 +108,34 @@
         "Team Size: Each team must consist of 2 players",
         "Registration Fee: Rs. 200/- per team",
         "Registration Deadline: March 21, 2025, by 4 PM",
-        "Competition Structure: Three rounds in total",
-        "Clue Handling: Players must hold onto their clues until the game concludes",
         "Completion Requirement: No mid-game withdrawals permitted"
+      ],
+      "judgingCriteria": [
+        {
+          "criterion": "Speed",
+          "marks": 50,
+          "description": "Time taken to complete all rounds"
+        },
+        {
+          "criterion": "Accuracy",
+          "marks": 30,
+          "description": "Correctness of solutions to clues"
+        },
+        {
+          "criterion": "Teamwork",
+          "marks": 20,
+          "description": "Effective collaboration between team members"
+        }
       ],
       "coordinators": [
         {
           "name": "Rishant Saini",
-          "semester": "BCA-IV",
+          "year": "BCA 2nd Year",
           "contact": "8448322125"
         },
         {
           "name": "Somil Gupta",
-          "semester": "BCA-VI",
+          "year": "BCA 3rd Year",
           "contact": "9711467536"
         }
       ],
@@ -107,37 +147,39 @@
       "subtitle": "Kahoot Quiz Competition",
       "tagline": "Knowledge is power, and with every challenge, we take a step closer to a greener, smarter future.",
       "description": "Get ready to embark on an exciting journey with the Techwhiz! Powered by Kahoot, this challenge invites you to dive into the world of green technology.",
-      "rounds": [
+      "rules": [
+        "Team Size: Maximum of 2 participants per team",
+        "Two rounds of competition",
+        "First Round: General reasoning and IT-related questions",
+        "Second Round: Rapid Fire Round for qualified teams",
+        "Time limits vary by round"
+      ],
+      "judgingCriteria": [
         {
-          "name": "First Round",
-          "rules": [
-            "13 teams participation",
-            "Quiz on general reasoning and IT-related questions",
-            "30 seconds to read, 20 seconds to answer",
-            "Scoring: +4 for correct, -2 for wrong"
-          ]
+          "criterion": "Accuracy",
+          "marks": 40,
+          "description": "Correctness of answers"
         },
         {
-          "name": "Second Round",
-          "rules": [
-            "6 teams selected from Round 1",
-            "Rapid Fire Round",
-            "30 seconds to read, 10 seconds to answer",
-            "Three wrong answers eliminate the team"
-          ]
+          "criterion": "Speed",
+          "marks": 30,
+          "description": "Time taken to answer questions"
+        },
+        {
+          "criterion": "Consistency",
+          "marks": 30,
+          "description": "Performance across all rounds"
         }
       ],
       "coordinators": [
         {
           "name": "Vinay Kumar",
-          "year": "1st",
-          "section": "A",
+          "year": "BCA 1st Year",
           "contact": "8527659732"
         },
         {
           "name": "Shubham",
-          "year": "2nd",
-          "section": "A",
+          "year": "BCA 2nd Year",
           "contact": "8287472533"
         }
       ],
@@ -155,30 +197,30 @@
         "Design must be unique",
         "Only Figma is allowed"
       ],
-      "markingCriteria": [
+      "judgingCriteria": [
         {
           "criterion": "Attention to Detail",
-          "points": 15,
+          "marks": 15,
           "description": "Consistency, pixel-perfect alignment, and overall polish"
         },
         {
           "criterion": "Balanced Layout & White Space",
-          "points": 10,
+          "marks": 10,
           "description": "Composition, structure, and strategic use of white space"
         },
         {
           "criterion": "Creativity & Originality",
-          "points": 10,
+          "marks": 10,
           "description": "Unique design approaches and visual storytelling"
         },
         {
           "criterion": "User Interface Functionality",
-          "points": 50,
+          "marks": 50,
           "description": "Placement of CTAs, user-friendliness, and accessibility"
         },
         {
           "criterion": "Theme Justification",
-          "points": 15,
+          "marks": 15,
           "description": "Use of colors, images, and design elements"
         }
       ],

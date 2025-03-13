@@ -23,10 +23,10 @@ const GameCard = ({ game }) => {
         <div className={`backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-red-500/10 
           transition-all duration-300 hover:transform hover:scale-105
           hover:shadow-[0_0_30px_rgba(239,68,68,0.2)] 
-          ${game.color ? game.color : 'bg-black'}`}>
+          bg-[#540909]`}>
           {/* Card Header */}
           <div className="relative z-10">
-            <h3 className="text-2xl font-bold mb-2 text-orange-500">
+            <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent truncate pb-4">
               {game.name}
             </h3>
             <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -48,7 +48,7 @@ const GameCard = ({ game }) => {
               {game.rules.slice(0, 3).map((rule, index) => (
                 <li key={index} className="text-gray-400 text-sm flex items-start space-x-2">
                   <span className="text-red-400 mt-1">•</span>
-                  <span>{rule}</span>
+                  <span className={"truncate"}>{rule}</span>
                 </li>
               ))}
               {game.rules.length > 3 && (
@@ -87,8 +87,7 @@ const GamesPage = () => {
   return (
     <>
       <Navbar />
-      <div className="relative min-h-screen bg-[url('/extra.png')] bg-cover bg-no-repeat text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/70 z-0" />
+      <div className="relative min-h-screen bg-gradient-to-b from-[#210000] to-[#830101] text-white py-20 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10" ref={ref}>
           {/* Header Section */}
           <motion.div
