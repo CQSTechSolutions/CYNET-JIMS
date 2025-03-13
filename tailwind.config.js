@@ -11,10 +11,15 @@ module.exports = {
         'slide-left': {
           '0%': { transform: 'translateX(100%)' },
           '100%': { transform: 'translateX(0)' }
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         }
       },
       animation: {
-        'slide-left': 'slide-left 0.3s ease-out'
+        'slide-left': 'slide-left 0.3s ease-out',
+        'fadeIn': 'fadeIn 1s ease-in-out',
       }
     },
   },

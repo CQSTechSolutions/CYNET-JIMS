@@ -371,21 +371,27 @@ const AdminDashboard = () => {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex flex-col gap-2">
-                                            <span className="text-green-800 font-medium">₹{registration.totalPayable}</span>
-                                            <span className="text-sm text-green-600">ID: {registration.transactionId}</span>
-                                            {registration.payment_ss && (
-                                                <div 
-                                                    className="relative w-20 h-20 cursor-pointer hover:opacity-80 transition-opacity rounded-lg overflow-hidden shadow-md"
-                                                    onClick={() => setSelectedPayment(registration)}
-                                                >
-                                                    <CldImage
-                                                        width="80"
-                                                        height="80"
-                                                        src={registration.payment_ss}
-                                                        alt="Payment Screenshot"
-                                                        className="object-cover"
-                                                    />
-                                                </div>
+                                            {registration.totalPayable > 0 ? (
+                                                <>
+                                                    <span className="text-green-800 font-medium">₹{registration.totalPayable}</span>
+                                                    <span className="text-sm text-green-600">ID: {registration.transactionId}</span>
+                                                    {registration.payment_ss && (
+                                                        <div 
+                                                            className="relative w-20 h-20 cursor-pointer hover:opacity-80 transition-opacity rounded-lg overflow-hidden shadow-md"
+                                                            onClick={() => setSelectedPayment(registration)}
+                                                        >
+                                                            <CldImage
+                                                                width="80"
+                                                                height="80"
+                                                                src={registration.payment_ss}
+                                                                alt="Payment Screenshot"
+                                                                className="object-cover"
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </>
+                                            ) : (
+                                                <span className="text-green-800 font-medium">FREE</span>
                                             )}
                                         </div>
                                     </td>

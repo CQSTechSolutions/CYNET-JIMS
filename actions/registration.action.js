@@ -44,6 +44,7 @@ try {
       type: String,
       required: [true, 'Transaction ID is required'],
       trim: true,
+      unique: true
     },
     semester: {
       type: String,
@@ -111,6 +112,16 @@ export async function registerForEvents(formData) {
       };
     }
 
+    // Check for duplicate transaction ID first
+    const existingTransaction = await Registration.findOne({ transactionId });
+    if (existingTransaction) {
+      return {
+        success: false,
+        message: 'This transaction ID has already been used. Please provide a unique transaction ID.',
+      };
+    }
+
+    // Check for duplicate email
     const existingRegistration = await Registration.findOne({ email });
     if (existingRegistration) {
       return {
@@ -143,18 +154,25 @@ export async function registerForEvents(formData) {
   } catch (error) {
     console.error('Registration error:', error);
     
-    // Handle duplicate email error
-    if (error.code === 11000 && error.keyPattern?.email) {
-      return {
-        success: false,
-        message: 'This email has already been registered. Please use a different email or contact support.',
-      };
+    // Handle duplicate key errors
+    if (error.code === 11000) {
+      if (error.keyPattern?.email) {
+        return {
+          success: false,
+          message: 'This email has already been registered. Please use a different email or contact support.',
+        };
+      }
+      if (error.keyPattern?.transactionId) {
+        return {
+          success: false,
+          message: 'This transaction ID has already been used. Please provide a unique transaction ID.',
+        };
+      }
     }
     
     return {
       success: false,
-      message: 'Registration failed. Please try again later.',
-      error: error.message,
+      message: 'An error occurred during registration. Please try again.',
     };
   }
 }
