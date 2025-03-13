@@ -1,8 +1,7 @@
 const GamexCite = () => {
 	return (
 		<svg
-			width="574"
-			height="647"
+			className={"w-[20vw]"}
 			viewBox="0 0 574 647"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

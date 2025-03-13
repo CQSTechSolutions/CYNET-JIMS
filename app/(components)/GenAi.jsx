@@ -1,8 +1,7 @@
 const GenAi = () => {
 	return (
 		<svg
-			width="576"
-			height="647"
+			className={"w-[20vw]"}
 			viewBox="0 0 576 647"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
