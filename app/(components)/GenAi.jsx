@@ -1,5 +1,8 @@
+import Link from "next/link";
+
 const GenAi = () => {
 	return (
+		<Link href={"/events/gen-ai-poster-makin"}>
 		<svg
 			className={"w-[20vw]"}
 			viewBox="0 0 576 647"
@@ -20,6 +23,7 @@ const GenAi = () => {
 				fill="#9EF8FF"
 			/>
 		</svg>
+		</Link>
 	);
 };
 

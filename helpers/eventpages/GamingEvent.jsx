@@ -12,7 +12,7 @@ const GamingEvent = ({ event }) => {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white py-20 overflow-hidden">
       <div className="container mx-auto px-4 relative" ref={ref}>
         {/* Cyber Grid Background */}
-        <div className="absolute inset-0 bg-[url('/cyber-grid.png')] opacity-10 bg-repeat" />
+        <div className="absolute inset-0 opacity-10 bg-repeat" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-transparent" />
 
         {/* Header Section */}

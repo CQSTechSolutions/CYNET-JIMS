@@ -1,25 +1,25 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import eventsData from '@/helpers/eventsdata.json';
-import ClassicEvent from "@/helpers/eventpages/ClassicEvent";
+import gamedata from '@/helpers/gamedata.json';
+import GamingEvent from "@/helpers/eventpages/GamingEvent";
 import Navbar from "@/app/(components)/Navbar";
 
 const Page = () => {
   const router = useRouter();
   const params = useParams();
-  const eventname = params.eventname;
+  const gamename = params.gamename;
 
-  // Get event data from JSON
-  const event = eventsData.events.find(e => e.id === eventname);
+  // Get game data from JSON
+  const game = gamedata.gamedata.find(g => g.id === gamename);
 
   useEffect(() => {
-    if (eventname && !event) {
+    if (gamename && !game) {
       router.push("/404");
     }
-  }, [eventname, router, event]);
+  }, [gamename, router, game]);
 
-  if (!eventname || !event) {
+  if (!gamename || !game) {
     return null;
   }
 
@@ -27,7 +27,7 @@ const Page = () => {
     <>
       <Navbar />
       <div className="">
-        <ClassicEvent event={event} />
+        <GamingEvent event={game} />
       </div>
     </>
   );

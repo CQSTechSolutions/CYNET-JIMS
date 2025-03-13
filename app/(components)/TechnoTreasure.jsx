@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const TechnoTreasure = () => {
     return (
-        <Link href={""}>
+        <Link href={"/events/techno-treasure"}>
             <svg
                 className={"w-[20vw]"}
                 viewBox="0 0 576 647"

@@ -9,11 +9,11 @@ const ClassicEvent = ({ event }) => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white py-20 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#123456] to-[#654321] text-white py-20 overflow-hidden">
       <div className="container mx-auto px-4 relative" ref={ref}>
         {/* Decorative Elements */}
         <div className="absolute inset-0 bg-grid-white/[0.02] -z-10" />
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-purple-500/10 via-transparent to-transparent blur-2xl -z-10" />
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-purple-500/10 via-blue-500/10 to-transparent blur-2xl -z-10" />
 
         {/* Header Section */}
         <motion.div
@@ -22,8 +22,8 @@ const ClassicEvent = ({ event }) => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-20 relative"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 blur-3xl -z-10" />
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 drop-shadow-lg transform hover:scale-105 transition-transform duration-300">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 blur-3xl -z-10" />
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-yellow-500 drop-shadow-lg transform hover:scale-105 transition-transform duration-300">
             {event.name}
           </h1>
           {event.subtitle && (
@@ -43,7 +43,7 @@ const ClassicEvent = ({ event }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-20 text-center max-w-3xl mx-auto backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-purple-500/30 transition-all duration-300"
+          className="mb-20 text-center max-w-3xl mx-auto backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
         >
           <p className="text-lg text-gray-300 leading-relaxed">{event.description}</p>
         </motion.div>
@@ -53,9 +53,9 @@ const ClassicEvent = ({ event }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-20 backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-purple-500/30 transition-all duration-300"
+          className="mb-20 backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
         >
-          <h3 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <h3 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
             Rules & Guidelines
           </h3>
           <ul className="list-none max-w-2xl mx-auto space-y-4">
@@ -80,7 +80,7 @@ const ClassicEvent = ({ event }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mb-20 backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-purple-500/30 transition-all duration-300"
+            className="mb-20 backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
           >
             <h3 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Judging Criteria
@@ -110,7 +110,7 @@ const ClassicEvent = ({ event }) => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-center mb-20"
           >
-            <h3 className="text-3xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h3 className="text-3xl font-bold mb-8 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
               Student Coordinators
             </h3>
             <div className="flex flex-wrap justify-center gap-8">
@@ -120,7 +120,7 @@ const ClassicEvent = ({ event }) => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className="backdrop-blur-sm bg-white/5 p-6 rounded-xl shadow-xl border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:transform hover:scale-105 group"
+                  className="backdrop-blur-sm bg-white/5 p-6 rounded-xl shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300 hover:transform hover:scale-105 group"
                 >
                   <p className="font-bold text-lg mb-2 group-hover:text-purple-400 transition-colors duration-300">
                     {coordinator.name}
@@ -146,7 +146,7 @@ const ClassicEvent = ({ event }) => {
         >
           <a
             href="/register-for-events"
-            className="inline-block bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white px-10 py-4 rounded-xl font-bold 
+            className="inline-block bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white px-10 py-4 rounded-xl font-bold 
             shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] 
             transition-all duration-300 transform hover:scale-105 
             animate-gradient bg-[length:200%_auto] hover:bg-[length:300%_auto]"

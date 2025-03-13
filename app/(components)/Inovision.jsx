@@ -1,5 +1,8 @@
+import Link from "next/link";
+
 const Inovision = () => {
 	return (
+		<Link href={"/events/innovision-6"}>
 		<svg
 			className={"w-[20vw]"}
 			viewBox="0 0 575 647"
@@ -20,6 +23,7 @@ const Inovision = () => {
 				fill="#9EF8FF"
 			/>
 		</svg>
+		</Link>
 	);
 };
 

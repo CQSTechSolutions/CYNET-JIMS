@@ -1,5 +1,8 @@
+import Link from "next/link";
+
 const GamexCite = () => {
 	return (
+		<Link href={"/games"}>
 		<svg
 			className={"w-[20vw]"}
 			viewBox="0 0 574 647"
@@ -20,6 +23,7 @@ const GamexCite = () => {
 				fill="#9EF8FF"
 			/>
 		</svg>
+		</Link>
 	);
 };
 export default GamexCite;
