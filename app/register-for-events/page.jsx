@@ -43,12 +43,12 @@ const Page = () => {
     const gamexcite = [
         { id: "Assassin-creed-shadow", name: "Assassin's Creed Shadows", price: 50 },
         { id: "bgmi-tournament", name: "BGMI Tournament", price: 200 },
-        { id: "takken-7", name: "Takken 7", price: 50 },
-        { id: "smash-kart", name: "Smash Kart", price: 30 },
+        { id: "takken-7", name: "Tekken 7", price: 50 },
+        { id: "smash-kart", name: "Smash Karts", price: 30 },
         { id: "stumble-guys", name: "Stumble Guys", price: 30 },
         { id: "valorant-tournament", name: "Valorant Tournament", price: 250 },
-        { id: "squid-games-robolox", name: "Squid Games (Robolox)", price: 50 },
-        { id: "mortal-kombat-11", name: "Mortal kombat 11", price: 50 },
+        { id: "squid-games-robolox", name: "Squid Games (Roblox)", price: 50 },
+        { id: "mortal-kombat-11", name: "Mortal kombat 11", price: 100 },
     ];
 
     const handleChange = (e) => {
