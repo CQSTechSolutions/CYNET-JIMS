@@ -4,7 +4,6 @@ import connectDB from '@/helpers/connectDb.helper';
 import mongoose from 'mongoose';
 import { revalidatePath } from 'next/cache';
 
-// Define the Registration schema
 let Registration;
 
 try {
