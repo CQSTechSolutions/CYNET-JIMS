@@ -222,7 +222,7 @@ const Page = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-green-700 mb-1">College/University</label>
+                                        <label className="block text-sm font-medium text-green-700 mb-1">College Name</label>
                                         <input
                                             type="text"
                                             name="college"
@@ -292,7 +292,7 @@ const Page = () => {
                                     </div>
                                     <div className="flex w-full items-center justify-between">
                                         <div>
-                                            <label className="block text-sm font-medium text-green-700 mb-1">Transaction ID</label>
+                                            <label className="block text-sm font-medium text-green-700 mb-1">UPI Transaction ID</label>
                                             <input
                                                 type="text"
                                                 name="transactionId"
