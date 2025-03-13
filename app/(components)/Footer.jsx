@@ -10,7 +10,7 @@ const Footer = () => {
     const scrollToSection = (sectionId) => {
         if (pathname !== '/') {
             // If not on homepage, navigate to homepage with section hash
-            window.location.href = `#${sectionId}`;
+            window.location.href = '/#' + sectionId;
             return;
         }
 

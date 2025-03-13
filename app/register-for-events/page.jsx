@@ -290,7 +290,7 @@ const Page = () => {
                                     <div className="bg-green-500 p-2 w-max rounded-sm mx-auto">
                                         <Image src="/payment_qr.jpeg" alt="payment_qr" width={200} height={200} />
                                     </div>
-                                    <div className="flex w-full items-center justify-between">
+                                    <div className="flex w-full items-center justify-between flex-col md:flex-row">
                                         <div>
                                             <label className="block text-sm font-medium text-green-700 mb-1">UPI Transaction ID</label>
                                             <input
@@ -329,7 +329,7 @@ const Page = () => {
                                                     <button
                                                         type="button"
                                                         onClick={() => open()}
-                                                        className="cursor-pointer w-max bg-green-100 text-green-700 py-3 px-4 rounded-md font-medium hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 mt-[1.5vw]"
+                                                        className="cursor-pointer w-auto md:w-max bg-green-100 text-green-700 py-3 px-4 rounded-md font-medium hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 mt-[1.5vw]"
                                                     >
                                                         {formData.payment_ss ? 'Change Payment Screenshot' : 'Upload Payment Screenshot'}
                                                     </button>
