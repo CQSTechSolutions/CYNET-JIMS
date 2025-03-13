@@ -45,9 +45,9 @@ const Navbar = () => {
                     >
                         <span className={`relative flex overflow-hidden items-center justify-center w-8 h-8 transform transition-all`}>
                             <span className={`flex flex-col justify-between gap-1 group cursor-pointer transform transition-all duration-300`}>
-                                <span className={`bg-white h-[3px] w-[1vw] group-hover:bg-green-500 transform transition-all duration-300 origin-left`}></span>
-                                <span className={`bg-white h-[3px] w-[2vw] group-hover:bg-green-500 transform transition-all duration-300 origin-left`}></span>
-                                <span className={`bg-white h-[3px] w-[3vw] group-hover:bg-green-500 rounded transform transition-all duration-300`}></span>
+                                <span className={`bg-white h-[3px] w-48 group-hover:bg-green-500 transform transition-all duration-300 origin-left`}></span>
+                                <span className={`bg-white h-[3px] w-48 group-hover:bg-green-500 transform transition-all duration-300 origin-left`}></span>
+                                <span className={`bg-white h-[3px] w-48 group-hover:bg-green-500 rounded transform transition-all duration-300`}></span>
                             </span>
                         </span>
                     </button>
