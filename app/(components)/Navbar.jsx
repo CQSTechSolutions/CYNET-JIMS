@@ -82,11 +82,11 @@ const Navbar = () => {
                                     <li key={index} className="border-b border-gray-800 pb-2">
                                         <Link 
                                             href={item.href} 
-                                            className="text-white text-3xl md:text-4xl hover:text-green-500 transition-all hover:pl-4 duration-300 flex items-center group font-monot"
+                                            className="text-white text-3xl md:text-4xl hover:text-green-500 active:text-green-500 transition-all hover:pl-4 duration-300 flex items-center group font-monot"
                                             onClick={() => setIsMenuOpen(false)}
                                         >
                                             {item.text}
-                                            <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                                            <span className="ml-2 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity">→</span>
                                         </Link>
                                     </li>
                                 ))}

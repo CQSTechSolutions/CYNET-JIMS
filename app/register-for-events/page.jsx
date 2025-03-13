@@ -133,17 +133,17 @@ const Page = () => {
                     events: [],
                     totalPayable: 0
                 });
-                setStatus({ ...status, isSubmitting: false }); // Reset submitting status
+                setStatus({ ...status, isSubmitting: false }); 
             } else {
                 if (result.message.includes('already registered')) {
-                    setStatus({ ...status, emailError: true, isSubmitting: false }); // Set email error state and reset submitting status
+                    setStatus({ ...status, emailError: true, isSubmitting: false });                
                 } else {
-                    toast.error(result.message); // Using toast for error message
+                    toast.error(result.message); 
                     setStatus({ ...status, isSubmitting: false }); // Reset submitting status
                 }
             }
         } catch (error) {
-            toast.error('An unexpected error occurred. Please try again.'); // Using toast for error message
+            toast.error('An unexpected error occurred. Please try again.');
             console.error('Form submission error:', error);
             setStatus({ ...status, isSubmitting: false }); // Reset submitting status
         }
@@ -170,7 +170,7 @@ const Page = () => {
                                 <h2 className="text-xl font-semibold text-green-700 pb-2 border-b border-green-200">Personal Information</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-sm font-medium text-green-700 mb-1">Full Name</label>
+                                        <label className="block text-sm font-medium text-green-700 mb-1">Full Name *</label>
                                         <input
                                             type="text"
                                             name="name"
@@ -183,7 +183,7 @@ const Page = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-green-700 mb-1">Email</label>
+                                        <label className="block text-sm font-medium text-green-700 mb-1">Email *</label>
                                         <input
                                             type="email"
                                             name="email"
@@ -197,7 +197,7 @@ const Page = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-green-700 mb-1">Phone Number</label>
+                                        <label className="block text-sm font-medium text-green-700 mb-1">Phone Number *</label>
                                         <input
                                             type="tel"
                                             name="phone"
@@ -210,7 +210,7 @@ const Page = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-green-700 mb-1">Enrollment Number</label>
+                                        <label className="block text-sm font-medium text-green-700 mb-1">Enrollment Number *</label>
                                         <input
                                             type="text"
                                             name="enrollmentNumber"
@@ -222,7 +222,7 @@ const Page = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-green-700 mb-1">College Name</label>
+                                        <label className="block text-sm font-medium text-green-700 mb-1">College Name *</label>
                                         <input
                                             type="text"
                                             name="college"
@@ -235,7 +235,7 @@ const Page = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-green-700 mb-1">Semester</label>
+                                        <label className="block text-sm font-medium text-green-700 mb-1">Semester *</label>
                                         <select
                                             name="semester"
                                             value={formData.semester}
@@ -260,24 +260,52 @@ const Page = () => {
                             {/* Event Selection Section */}
                             <div className="space-y-6">
                                 <h2 className="text-xl font-semibold text-green-700 pb-2 border-b border-green-200">Event Selection</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {events.concat(gamexcite).map(event => (
-                                        <div key={event.id} className="flex items-start">
-                                            <input
-                                                id={event.id}
-                                                name="events"
-                                                type="checkbox"
-                                                value={event.id}
-                                                checked={formData.events.includes(event.id)}
-                                                onChange={handleChange}
-                                                className="h-5 w-5 text-green-600 border-green-500 rounded mt-1"
-                                            />
-                                            <label htmlFor={event.id} className="ml-3 text-sm text-gray-700">
-                                                {event.name} - {event.price === 0 ? 'Free' : `₹${event.price}`}
-                                            </label>
-                                        </div>
-                                    ))}
+                                
+                                {/* Technical Events */}
+                                <div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {events.map(event => (
+                                            <div key={event.id} className="flex items-start">
+                                                <input
+                                                    id={event.id}
+                                                    name="events"
+                                                    type="checkbox"
+                                                    value={event.id}
+                                                    checked={formData.events.includes(event.id)}
+                                                    onChange={handleChange}
+                                                    className="h-5 w-5 text-green-600 border-green-500 rounded mt-1"
+                                                />
+                                                <label htmlFor={event.id} className="ml-3 text-sm text-gray-700">
+                                                    {event.name} - {event.price === 0 ? 'Free' : `₹${event.price}`}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
+
+                                {/* Gaming Events */}
+                                <div>
+                                    <h3 className="text-lg font-medium text-green-600 mb-3">Gaming Events (GameXcite)</h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {gamexcite.map(event => (
+                                            <div key={event.id} className="flex items-start">
+                                                <input
+                                                    id={event.id}
+                                                    name="events"
+                                                    type="checkbox"
+                                                    value={event.id}
+                                                    checked={formData.events.includes(event.id)}
+                                                    onChange={handleChange}
+                                                    className="h-5 w-5 text-green-600 border-green-500 rounded mt-1"
+                                                />
+                                                <label htmlFor={event.id} className="ml-3 text-sm text-gray-700">
+                                                    {event.name} - ₹{event.price}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
                                 {formData.events.length === 0 ? (
                                     <p className="text-sm text-red-500">Please select at least one event</p>
                                 ) : (
@@ -348,6 +376,7 @@ const Page = () => {
                                 >
                                     {status.isSubmitting ? 'Submitting...' : 'Complete Registration'}
                                 </button>
+                                <p className="text-center text-sm my-1 text-red-400">* (Please read the detailed rule book of the event before registration)</p>
                             </div>
 
                         </form>
@@ -355,7 +384,7 @@ const Page = () => {
                 </div>
             </div>
             <Footer />
-            <ToastContainer /> {/* Adding ToastContainer to render the toasts */}
+            <ToastContainer /> 
         </div>
         // <ComingSoon />
     );

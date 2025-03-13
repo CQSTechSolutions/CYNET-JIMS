@@ -94,9 +94,9 @@ const Ourteam = () => {
                     className="rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
                   />
 
-                  {/* Overlay that appears on hover */}
-                  <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-4">
-                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 text-center space-y-2">
+                  {/* Overlay that appears on hover/touch */}
+                  <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 active:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-4">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 text-center space-y-2">
                       <p className="text-lg sm:text-xl font-bold">{head.name}</p>
                       <p className="text-xs sm:text-sm text-[#CBFF4D] font-semibold">
                         {head.role} - {head.position}
