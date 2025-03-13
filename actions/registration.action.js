@@ -112,11 +112,12 @@ export async function registerForEvents(formData) {
     }
 
     // Check for duplicate transaction ID first
+    // it is checking when the trasaction id is not filled by the user, i.e going manually.
     const existingTransaction = await Registration.findOne({ transactionId });
     if (existingTransaction) {
       return {
         success: false,
-        message: 'This transaction ID has already been used. Please provide a unique transaction ID.',
+        message: 'Email is already used.',
       };
     }
 
@@ -164,7 +165,7 @@ export async function registerForEvents(formData) {
       if (error.keyPattern?.transactionId) {
         return {
           success: false,
-          message: 'This transaction ID has already been used. Please provide a unique transaction ID.',
+          message: 'Invalid Details. Please Check the form before submitting.',
         };
       }
     }
