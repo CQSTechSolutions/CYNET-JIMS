@@ -8,6 +8,17 @@ const ClassicEvent = ({ event }) => {
     triggerOnce: true
   });
 
+  // Helper function to get rules from either format
+  const getRules = () => {
+    if (event.rules) return event.rules;
+    if (event.rounds) {
+      return event.rounds.reduce((acc, round) => {
+        return [...acc, ...round.rules.map(rule => `${round.name}: ${rule}`)];
+      }, []);
+    }
+    return [];
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#123456] to-[#654321] text-white py-20 overflow-hidden">
       <div className="container mx-auto px-4 relative" ref={ref}>
@@ -49,30 +60,61 @@ const ClassicEvent = ({ event }) => {
         </motion.div>
 
         {/* Rules Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-20 backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
-        >
-          <h3 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-            Rules & Guidelines
-          </h3>
-          <ul className="list-none max-w-2xl mx-auto space-y-4">
-            {event.rules.map((rule, index) => (
-              <motion.li
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-                className="text-gray-300 flex items-start space-x-3 group hover:bg-white/5 p-3 rounded-lg transition-all duration-300"
-              >
-                <span className="text-purple-400 text-xl">•</span>
-                <span className="group-hover:text-white transition-colors duration-300">{rule}</span>
-              </motion.li>
-            ))}
-          </ul>
-        </motion.div>
+        {(event.rules || event.rounds) && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-20 backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
+          >
+            <h3 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+              {event.rounds ? "Tournament Rounds" : "Rules & Guidelines"}
+            </h3>
+            {event.rounds ? (
+              // Render rounds
+              <div className="space-y-8">
+                {event.rounds.map((round, roundIndex) => (
+                  <motion.div
+                    key={roundIndex}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.1 * roundIndex }}
+                    className="backdrop-blur-sm bg-white/5 p-6 rounded-xl border border-white/10"
+                  >
+                    <h4 className="text-xl font-bold mb-4 text-yellow-400">{round.name}</h4>
+                    <ul className="space-y-3">
+                      {round.rules.map((rule, ruleIndex) => (
+                        <li
+                          key={ruleIndex}
+                          className="text-gray-300 flex items-start space-x-3 group hover:bg-white/5 p-2 rounded-lg transition-all duration-300"
+                        >
+                          <span className="text-yellow-400 text-xl">•</span>
+                          <span className="group-hover:text-white transition-colors duration-300">{rule}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              // Render regular rules
+              <ul className="list-none max-w-2xl mx-auto space-y-4">
+                {getRules().map((rule, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.1 * index }}
+                    className="text-gray-300 flex items-start space-x-3 group hover:bg-white/5 p-3 rounded-lg transition-all duration-300"
+                  >
+                    <span className="text-yellow-400 text-xl">•</span>
+                    <span className="group-hover:text-white transition-colors duration-300">{rule}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            )}
+          </motion.div>
+        )}
 
         {/* Judging Criteria Section */}
         {event.judgingCriteria && (
@@ -85,20 +127,73 @@ const ClassicEvent = ({ event }) => {
             <h3 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Judging Criteria
             </h3>
-            <ul className="list-none max-w-2xl mx-auto space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {event.judgingCriteria.map((criteria, index) => (
-                <motion.li
+                <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className="text-gray-300 flex items-start space-x-3 group hover:bg-white/5 p-3 rounded-lg transition-all duration-300"
+                  className="backdrop-blur-sm bg-white/5 p-6 rounded-xl border border-white/10 
+                    hover:border-purple-500/30 transition-all duration-300 hover:transform hover:scale-105"
                 >
-                  <span className="text-purple-400 text-xl">•</span>
-                  <span className="group-hover:text-white transition-colors duration-300">{criteria}</span>
-                </motion.li>
+                  <h4 className="text-xl font-semibold mb-2 text-purple-300">
+                    {criteria.criterion}
+                  </h4>
+                  <div className="text-3xl font-bold text-pink-400 mb-2">
+                    {criteria.marks} Points
+                  </div>
+                  {criteria.description && (
+                    <p className="text-gray-400 text-sm">
+                      {criteria.description}
+                    </p>
+                  )}
+                  {criteria.note && (
+                    <p className="text-yellow-400 text-sm mt-2 italic">
+                      Note: {criteria.note}
+                    </p>
+                  )}
+                </motion.div>
               ))}
-            </ul>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Marking Criteria Section */}
+        {event.markingCriteria && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mb-20 backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
+          >
+            <h3 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Marking Criteria
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {event.markingCriteria.map((criteria, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  className="backdrop-blur-sm bg-white/5 p-6 rounded-xl border border-white/10 
+                    hover:border-purple-500/30 transition-all duration-300 hover:transform hover:scale-105"
+                >
+                  <h4 className="text-xl font-semibold mb-2 text-purple-300">
+                    {criteria.criterion}
+                  </h4>
+                  <div className="text-3xl font-bold text-pink-400 mb-2">
+                    {criteria.points} Points
+                  </div>
+                  {criteria.description && (
+                    <p className="text-gray-400 text-sm">
+                      {criteria.description}
+                    </p>
+                  )}
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         )}
 
