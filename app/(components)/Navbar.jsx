@@ -74,7 +74,7 @@ const Navbar = () => {
                             <ul className="flex flex-col space-y-8 items-center justify-center w-min ml-10">
                                 {[
                                     { href: "/", text: "Home" },
-                                    { href: "/events", text: "Events" },
+                                    // { href: "/events", text: "Events" },
                                     { href: "/register-for-events", text: "Registration" },
                                     { href: "/gallery", text: "Gallery" },
                                     { href: "/contact", text: "Contact" }
