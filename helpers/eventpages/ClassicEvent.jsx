@@ -20,7 +20,7 @@ const ClassicEvent = ({ event }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#123456] to-[#654321] text-white py-20 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#210000] to-[#830101] text-white py-20 overflow-hidden">
       <div className="container mx-auto px-4 relative" ref={ref}>
         {/* Decorative Elements */}
         <div className="absolute inset-0 bg-grid-white/[0.02] -z-10" />
@@ -34,7 +34,7 @@ const ClassicEvent = ({ event }) => {
           className="text-center mb-20 relative"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 blur-3xl -z-10" />
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-yellow-500 drop-shadow-lg transform hover:scale-105 transition-transform duration-300">
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-white text-transparent bg-gradient-to-r from-red-500 to-yellow-500 drop-shadow-lg transform hover:scale-105 transition-transform duration-300">
             {event.name}
           </h1>
           {event.subtitle && (
@@ -54,7 +54,7 @@ const ClassicEvent = ({ event }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-20 text-center max-w-3xl mx-auto backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
+          className="mb-20 text-center max-w-3xl mx-auto backdrop-blur-sm bg-[#540909] rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
         >
           <p className="text-lg text-gray-300 leading-relaxed">{event.description}</p>
         </motion.div>
@@ -65,7 +65,7 @@ const ClassicEvent = ({ event }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-20 backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
+            className="mb-20 backdrop-blur-sm bg-[#540909] rounded-2xl p-8 shadow-xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
           >
             <h3 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
               {event.rounds ? "Tournament Rounds" : "Rules & Guidelines"}

@@ -26,7 +26,7 @@ const GameCard = ({ game }) => {
           ${game.color ? game.color : 'bg-black'}`}>
           {/* Card Header */}
           <div className="relative z-10">
-            <h3 className="text-2xl font-bold mb-2 text-green-500">
+            <h3 className="text-2xl font-bold mb-2 text-orange-500">
               {game.name}
             </h3>
             <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -97,10 +97,10 @@ const GamesPage = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-rose-500 to-red-400">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-white text-transparent bg-gradient-to-r from-red-400 via-rose-500 to-red-400">
               Gaming Tournaments
             </h1>
-            <p className="text-gray-400 text-lg">
+            <p className="text-green-400 text-lg">
               Compete in our thrilling gaming competitions and prove your skills
             </p>
           </motion.div>
