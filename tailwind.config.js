@@ -7,20 +7,20 @@ module.exports = {
   ],
   theme: {
     extend: {
-      keyframes: {
-        'slide-left': {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0)' }
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        }
-      },
       animation: {
-        'slide-left': 'slide-left 0.3s ease-out',
-        'fadeIn': 'fadeIn 1s ease-in-out',
-      }
+        'gradient': 'gradient 3s linear infinite',
+        'float': 'float 3s ease-in-out infinite',
+      },
+      keyframes: {
+        gradient: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
     },
   },
   plugins: [],

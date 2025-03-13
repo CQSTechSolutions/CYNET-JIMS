@@ -1,49 +1,43 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
-
-const allowedEvents = [
-  "innovision-6",
-  "ai-design-sprint",
-  "hack-the-hunt",
-  "gamexcite",
-  "byete-beyond",
-  "green-pixel",
-  "green-tech-quest",
-];
+import eventsData from '@/helpers/eventsdata.json';
+import ClassicEvent from "@/helpers/eventpages/ClassicEvent";
+import GamingEvent from "@/helpers/eventpages/GamingEvent";
+import Navbar from "@/app/(components)/Navbar";
 
 const Page = () => {
   const router = useRouter();
   const params = useParams();
   const eventname = params.eventname;
 
+  // Get event data from JSON
+  const event = eventsData.events.find(e => e.id === eventname);
+
   useEffect(() => {
-    if (eventname && !allowedEvents.includes(eventname)) {
+    if (eventname && !event) {
       router.push("/404");
     }
-  }, [eventname, router]);
+  }, [eventname, router, event]);
 
-  if (!eventname) {
+  if (!eventname || !event) {
     return null;
   }
 
+  // Check if it's a gaming event by looking for gaming-specific properties
+  const isGamingEvent = event.platform && event.format;
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      {allowedEvents.includes(eventname) ? (
-        <div className="text-center p-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {eventname
-              .replace(/-/g, " ")
-              .split(" ")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
-          </h1>
-          <p className="text-lg text-gray-600">
-            Welcome to our event page. More details coming soon!
-          </p>
-        </div>
-      ) : null}
-    </div>
+    <>
+      <Navbar />
+      <div className="">
+        {isGamingEvent ? (
+          <GamingEvent event={event} />
+        ) : (
+          <ClassicEvent event={event} />
+        )}
+      </div>
+    </>
   );
 };
 

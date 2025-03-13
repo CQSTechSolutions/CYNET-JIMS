@@ -1,1 +1,423 @@
-// TODO: populate the json
+{
+  "events": [
+    {
+      "id": "innovision-6",
+      "name": "Innovision 6.0",
+      "subtitle": "An Ideathon Competition",
+      "tagline": "Innovate for a Greener Tomorrow: Shaping a Sustainable Future with Innovision 6.0",
+      "description": "Are you ready to drive change? Innovision 6.0 is calling all visionaries and changemakers to showcase transformative ideas that merge sustainability with innovation. In this groundbreaking competition, we challenge participants to develop cutting-edge solutions that have the power to create lasting environmental and societal impact.",
+      "rules": [
+        "Team Size: Maximum of three participants per team",
+        "Presentation Duration: 8–10 minutes per team, followed by a 2-minute Q&A session",
+        "Slide Requirement: Presentations must include a minimum of 8–10 slides",
+        "Focus Area: Must address key sustainability challenges and provide innovative solutions"
+      ],
+      "judgingCriteria": [
+        "Innovation: Originality and creativity of the idea",
+        "Methodology: Clear approach and plan for execution",
+        "Market Potential: Ability to scale and reach the target market",
+        "Feasibility: Practicality and viability of the solution",
+        "Presentation: Quality and clarity of the pitch"
+      ],
+      "focusAreas": [
+        "Renewable Energy Innovations",
+        "Circular Economy & Waste Management",
+        "Sustainable Agriculture & Food Tech",
+        "Green Building & Smart Cities",
+        "Eco-friendly Consumer Products",
+        "AI & Data-Driven Sustainability",
+        "Water Conservation & Management",
+        "Sustainable Transportation & Mobility",
+        "Climate Change Mitigation & Adaptation"
+      ],
+      "coordinators": [
+        {
+          "name": "Arsh",
+          "semester": "4th",
+          "contact": "8800696879"
+        },
+        {
+          "name": "Anshika M.",
+          "semester": "6th",
+          "contact": "7303025922"
+        }
+      ],
+      "price": 0
+    },
+    {
+      "id": "gen-ai-poster-makin",
+      "name": "Gen AI Design Sprint",
+      "subtitle": "Gen AI Poster Making Competition",
+      "description": "Get ready for an exciting fusion of imagination and technology! The Gen AI Design Sprint challenges you to create visually stunning posters using the power of ChatGPT.",
+      "rules": [
+        "Individual Participation only",
+        "Maximum of five prompts during the event",
+        "Only ChatGPT may be used",
+        "Theme will be provided at the beginning",
+        "15 minutes time limit",
+        "Single round event"
+      ],
+      "judgingCriteria": [
+        "Prompts given by participants",
+        "Design of the poster"
+      ],
+      "coordinators": [
+        {
+          "name": "Bhaskar Kataria",
+          "semester": "6th"
+        },
+        {
+          "name": "Pranav Kumar",
+          "semester": "6th"
+        }
+      ],
+      "price": 0
+    },
+    {
+      "id": "techno-treasure",
+      "name": "Techno Treasure",
+      "subtitle": "Treasure Hunt",
+      "tagline": "Embark on a tech-filled adventure where every clue brings you closer to the treasure of knowledge!",
+      "description": "Are you ready for an adventure that blends technology with excitement? Techno Treasure challenges you to solve puzzles, discover hidden clues, and navigate through a tech-filled journey.",
+      "rules": [
+        "Team Size: Each team must consist of 2 players",
+        "Registration Fee: Rs. 200/- per team",
+        "Registration Deadline: March 21, 2025, by 4 PM",
+        "Competition Structure: Three rounds in total",
+        "Clue Handling: Players must hold onto their clues until the game concludes",
+        "Completion Requirement: No mid-game withdrawals permitted"
+      ],
+      "coordinators": [
+        {
+          "name": "Rishant Saini",
+          "semester": "BCA-IV",
+          "contact": "8448322125"
+        },
+        {
+          "name": "Somil Gupta",
+          "semester": "BCA-VI",
+          "contact": "9711467536"
+        }
+      ],
+      "price": 200
+    },
+    {
+      "id": "techwiz-green-tech-quest",
+      "name": "Techwiz",
+      "subtitle": "Kahoot Quiz Competition",
+      "tagline": "Knowledge is power, and with every challenge, we take a step closer to a greener, smarter future.",
+      "description": "Get ready to embark on an exciting journey with the Techwhiz! Powered by Kahoot, this challenge invites you to dive into the world of green technology.",
+      "rounds": [
+        {
+          "name": "First Round",
+          "rules": [
+            "13 teams participation",
+            "Quiz on general reasoning and IT-related questions",
+            "30 seconds to read, 20 seconds to answer",
+            "Scoring: +4 for correct, -2 for wrong"
+          ]
+        },
+        {
+          "name": "Second Round",
+          "rules": [
+            "6 teams selected from Round 1",
+            "Rapid Fire Round",
+            "30 seconds to read, 10 seconds to answer",
+            "Three wrong answers eliminate the team"
+          ]
+        }
+      ],
+      "coordinators": [
+        {
+          "name": "Vinay Kumar",
+          "year": "1st",
+          "section": "A",
+          "contact": "8527659732"
+        },
+        {
+          "name": "Shubham",
+          "year": "2nd",
+          "section": "A",
+          "contact": "8287472533"
+        }
+      ],
+      "price": 0
+    },
+    {
+      "id": "ux-marvels",
+      "name": "UX Marvels",
+      "subtitle": "Figma UI Challenge",
+      "tagline": "Crafting the Future of Design",
+      "description": "The UX Marvels: Figma Challenge is here to push your creative limits and test your skills in building user-centric, visually stunning digital interfaces.",
+      "rules": [
+        "One round of 60 minutes",
+        "Maximum 2 participants per team",
+        "Design must be unique",
+        "Only Figma is allowed"
+      ],
+      "markingCriteria": [
+        {
+          "criterion": "Attention to Detail",
+          "points": 15,
+          "description": "Consistency, pixel-perfect alignment, and overall polish"
+        },
+        {
+          "criterion": "Balanced Layout & White Space",
+          "points": 10,
+          "description": "Composition, structure, and strategic use of white space"
+        },
+        {
+          "criterion": "Creativity & Originality",
+          "points": 10,
+          "description": "Unique design approaches and visual storytelling"
+        },
+        {
+          "criterion": "User Interface Functionality",
+          "points": 50,
+          "description": "Placement of CTAs, user-friendliness, and accessibility"
+        },
+        {
+          "criterion": "Theme Justification",
+          "points": 15,
+          "description": "Use of colors, images, and design elements"
+        }
+      ],
+      "coordinators": [
+        {
+          "name": "Samaksh",
+          "year": "BCA 3rd Year",
+          "contact": "9266768244"
+        },
+        {
+          "name": "Ishqpreet Singh",
+          "year": "BCA 1st Year",
+          "contact": "9810140008"
+        }
+      ],
+      "price": 0
+    },
+    {
+      "id": "reelify-reel-making",
+      "name": "Reelify",
+      "subtitle": "Reel Making Challenge",
+      "tagline": "Innovate Today for a Sustainable Tomorrow: Pioneering the Future of Green Technology with Reelify",
+      "description": "Create a 1-minute reel that highlights sustainable technology solutions, driving awareness and inspiring action.",
+      "rules": [
+        "Team Size: Maximum of 2 participants per team",
+        "Reel Duration: Must be 1 minute",
+        "Time Limit: 40-50 minutes to create",
+        "Content Focus: Must center on sustainable technology",
+        "Format: MP4 or MOV",
+        "AI-generated content allowed but must be disclosed"
+      ],
+      "judgingCriteria": [
+        {
+          "criterion": "Relevance to Theme",
+          "marks": 20
+        },
+        {
+          "criterion": "Creativity & Innovation",
+          "marks": 20
+        },
+        {
+          "criterion": "Technical Execution",
+          "marks": 20
+        },
+        {
+          "criterion": "Impact & Engagement",
+          "marks": 20
+        },
+        {
+          "criterion": "Adherence to Time Limit & Rules",
+          "marks": 10
+        },
+        {
+          "criterion": "Text Font & Presentation",
+          "marks": 10,
+          "note": "tiebreaker if needed"
+        }
+      ],
+      "coordinators": [
+        {
+          "name": "Roshan Singhal",
+          "year": "BCA 2nd Year",
+          "contact": "9310886198"
+        },
+        {
+          "name": "Sanya Bansal",
+          "year": "BCA 1st Year",
+          "contact": "8076868813"
+        }
+      ],
+      "price": 0
+    },
+    {
+      "id": "assassins-creed-shadows",
+      "name": "Assassin's Creed: Shadows Tournament",
+      "platform": "PC",
+      "format": "Mission-based",
+      "location": "On-venue",
+      "description": "Complete missions in the shortest time to claim victory in this thrilling Assassin's Creed tournament.",
+      "rules": [
+        "Mission details revealed at start",
+        "Time-based completion ranking",
+        "Players must be physically present",
+        "Strict time limits enforced"
+      ],
+      "price": 50,
+      "coordinators": [
+        {
+          "name": "Arsh",
+          "semester": "4th",
+          "contact": "8800696879"
+        },
+        {
+          "name": "Anshika M.",
+          "semester": "6th",
+          "contact": "7303025922"
+        }
+      ]
+    },
+    {
+      "id": "bgmi-tournament",
+      "name": "BGMI Tournament",
+      "platform": "Mobile",
+      "format": "Squad Classic",
+      "location": "Online",
+      "description": "Battle it out in BGMI's intense squad matches for glory and prizes.",
+      "rules": [
+        "Squad format (4 players)",
+        "Mobile devices only - no emulators",
+        "Points-based system",
+        "Official BGMI map rotation"
+      ],
+      "price": 200,
+      "coordinators": [
+        {
+          "name": "Rishant Saini",
+          "semester": "BCA-IV",
+          "contact": "8448322125"
+        },
+        {
+          "name": "Somil Gupta",
+          "semester": "BCA-VI",
+          "contact": "9711467536"
+        }
+      ]
+    },
+    {
+      "id": "tekken-7",
+      "name": "Tekken 7 Tournament",
+      "platform": "PC",
+      "format": "1v1 Fighting",
+      "location": "On-venue",
+      "description": "Show your fighting skills in intense 1v1 matches.",
+      "rules": [
+        "Best of 3 rounds per match",
+        "60 seconds per round",
+        "Random stage selection",
+        "Standard game format"
+      ],
+      "price": 50,
+      "coordinators": [
+        {
+          "name": "Rishant Saini",
+          "semester": "BCA-IV",
+          "contact": "8448322125"
+        },
+        {
+          "name": "Somil Gupta",
+          "semester": "BCA-VI",
+          "contact": "9711467536"
+        }
+      ]
+    },
+
+    {
+        "id": "smash-kart",
+        "name": "Smash Kart Tournament",
+        "platform": "Mobile",
+        "format": "Single Knockout",
+        "location": "On-venue",
+        "rules": [
+          "Standard Mode gameplay",
+          "Default track selection",
+          "Winner based on highest ranking",
+          "3-minute tiebreaker if needed",
+          "No technical pauses allowed",
+          "Screenshot required for results"
+        ],
+        "price": 30
+      },
+      {
+        "id": "stumble-guys",
+        "name": "Stumble Guys Tournament",
+        "platform": "Mobile",
+        "format": "Battle Royale",
+        "location": "On-venue",
+        "rules": [
+          "Standard Match format",
+          "Last player standing wins",
+          "No technical pauses",
+          "No leaving during matches",
+          "Screenshot required for results"
+        ],
+        "price": 30
+      },
+      {
+        "id": "valorant-tournament",
+        "name": "Valorant Tournament",
+        "platform": "PC",
+        "format": "5v5 Competitive",
+        "location": "Online",
+        "rules": [
+          "Best-of format (BO1, BO3 for semifinals & finals)",
+          "Official map pool",
+          "13 rounds to win",
+          "One substitute per team",
+          "1-minute tactical pause per half",
+          "Must join Discord 15 minutes before match",
+          "10-15 minute grace period"
+        ],
+        "price": 250
+      },
+      {
+        "id": "squid-games-robolox",
+        "name": "Squid Games (Roblox)",
+        "platform": "Mobile",
+        "format": "Battle Royale",
+        "location": "On-venue",
+        "maxPlayers": 50,
+        "miniGames": [
+          "Red Light, Green Light",
+          "Dalgona Challenge",
+          "Six-Legged Pentathlon",
+          "Tug of War",
+          "Marbles",
+          "Mingle",
+          "Glass Bridge",
+          "Squid Game Final"
+        ],
+        "rules": [
+          "Battle Royale elimination style",
+          "Last player standing wins",
+          "No hacking or exploits",
+          "No teaming allowed",
+          "Disconnected players cannot rejoin"
+        ],
+        "price": 50,
+        "coordinators": [
+          {
+            "name": "Ayush Dahiya",
+            "semester": "2nd",
+            "contact": "9810480038"
+          },
+          {
+            "name": "Hardik Solanki",
+            "semester": "6th",
+            "contact": "8810460033"
+          }
+        ]
+      }
+  ]
+}
