@@ -3,6 +3,7 @@
 import connectDB from '@/helpers/connectDb.helper';
 import mongoose from 'mongoose';
 import { revalidatePath } from 'next/cache';
+import { sendEmail } from '@/utils/mailer';
 
 let Registration;
 
@@ -112,7 +113,6 @@ export async function registerForEvents(formData) {
     }
 
     // Check for duplicate transaction ID first
-    // it is checking when the trasaction id is not filled by the user, i.e going manually.
     const existingTransaction = await Registration.findOne({ transactionId });
     if (existingTransaction) {
       return {
@@ -144,6 +144,76 @@ export async function registerForEvents(formData) {
     });
 
     await registration.save();
+
+    // Prepare email content
+    const userEmailHtml = `
+      <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; border: 2px solid #4CAF50; border-radius: 10px;">
+        <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">Registration Confirmation - Cynet 2025</h2>
+        <p>Dear <strong style="color: #333;">${name}</strong>,</p>
+        <p>Thank you for registering for <strong style="color: #4CAF50;">Cynet 2025</strong>! Your registration has been received successfully.</p>
+        
+        <h3 style="color: #4CAF50;">Registration Details:</h3>
+        <ul style="list-style-type: none; padding: 0;">
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Name:</strong> <span style="color: #333;">${name}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Email:</strong> <span style="color: #333;">${email}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Phone:</strong> <span style="color: #333;">${phone}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>College:</strong> <span style="color: #333;">${college}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Enrollment Number:</strong> <span style="color: #333;">${enrollmentNumber}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Semester:</strong> <span style="color: #333;">${semester}</span></li>
+          ${email === transactionId && email === payment_ss ? '' : `<li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Transaction ID:</strong> <span style="color: #333;">${transactionId}</span></li>`}
+          ${email === payment_ss ? '' : `<li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Total Amount:</strong> <span style="color: #333;">₹${totalPayable}</span></li>`}
+        </ul>
+
+        <h3 style="color: #4CAF50;">Registered Events:</h3>
+        <ul style="list-style-type: none; padding: 0;">
+          ${events.map(event => `<li style="border-bottom: 1px solid #ddd; padding: 8px;">${event}</li>`).join('')}
+        </ul>
+
+        <p>Your registration is currently under review. We will verify your payment and send you a confirmation email.</p>
+        
+        <p>If you have any questions, feel free to reply to this email.</p>
+        
+        <p>Best regards,<br><strong style="color: #4CAF50;">Team Cynet</strong></p>
+      </div>
+    `;
+
+    // Send notification email to admin
+    const adminEmailHtml = `
+      <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; border: 2px solid #4CAF50; border-radius: 10px;">
+        <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">New Event Registration</h2>
+        <h3 style="color: #4CAF50;">Participant Details:</h3>
+        <ul style="list-style-type: none; padding: 0;">
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Name:</strong> <span style="color: #333;">${name}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Email:</strong> <span style="color: #333;">${email}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Phone:</strong> <span style="color: #333;">${phone}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>College:</strong> <span style="color: #333;">${college}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Enrollment Number:</strong> <span style="color: #333;">${enrollmentNumber}</span></li>
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Semester:</strong> <span style="color: #333;">${semester}</span></li>
+          ${email === transactionId ? '' : `<li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Transaction ID:</strong> <span style="color: #333;">${transactionId}</span></li>`}
+          <li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Total Amount:</strong> <span style="color: #333;">₹${totalPayable}</span></li>
+          ${email === payment_ss ? '' : `<li style="border-bottom: 1px solid #ddd; padding: 8px;"><strong>Payment Screenshot:</strong> <a href="${payment_ss}" style="color: #4CAF50;">View Screenshot</a></li>`}
+        </ul>
+
+        <h3 style="color: #4CAF50;">Registered Events:</h3>
+        <ul style="list-style-type: none; padding: 0;">
+          ${events.map(event => `<li style="border-bottom: 1px solid #ddd; padding: 8px;">${event}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+
+    // Send emails
+    await Promise.all([
+      sendEmail(
+        email,
+        'Registration Confirmation - Cynet 2025',
+        userEmailHtml
+      ),
+      sendEmail(
+        process.env.EMAIL_USER,
+        `New Registration: ${name} - ${events.length} events`,
+        adminEmailHtml
+      )
+    ]);
 
     revalidatePath('/register-for-events');
 
