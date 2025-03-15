@@ -2,6 +2,7 @@
 
 import connectDB from '@/helpers/connectDb.helper';
 import mongoose from 'mongoose';
+import { sendEmail } from '@/utils/mailer';
 
 // Import or define the Registration schema
 const RegistrationSchema = new mongoose.Schema({
@@ -96,7 +97,7 @@ export async function updateRegistrationStatus(registrationId, status) {
         const registration = await Registration.findByIdAndUpdate(
             registrationId,
             { status },
-            { new: true, lean: true }
+            { new: true }
         );
         
         if (!registration) {
@@ -105,15 +106,76 @@ export async function updateRegistrationStatus(registrationId, status) {
                 error: 'Registration not found' 
             };
         }
-        
+
+        // Send email based on status
+        let emailHtml = '';
+        let emailSubject = '';
+
+        if (status === 'verified') {
+            emailSubject = 'Registration Verified - Cynet 2025';
+            emailHtml = `
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; border: 2px solid #4CAF50; border-radius: 10px; background-color: #f9f9f9;">
+                    <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">Registration Verified!</h2>
+                    <p style="margin: 10px 0;">Dear ${registration.name},</p>
+                    <p style="margin: 10px 0;">Your registration for Cynet 2025 has been verified successfully!</p>
+                    
+                    <h3 style="color: #4CAF50; margin-top: 20px;">Registration Details:</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin: 5px 0;"><strong>Name:</strong> ${registration.name}</li>
+                        <li style="margin: 5px 0;"><strong>Events:</strong> ${registration.events.join(', ')}</li>
+                        <li style="margin: 5px 0;"><strong>Amount Paid:</strong> ₹${registration.totalPayable}</li>
+                    </ul>
+
+                    <p style="margin-top: 20px;">We look forward to seeing you at the event!</p>
+                    <p>Best regards,<br>Team Cynet</p>
+                </div>
+            `;
+        } else if (status === 'rejected') {
+            emailSubject = 'Registration Update - Cynet 2025';
+            emailHtml = `
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; border: 2px solid #ff4444; border-radius: 10px; background-color: #f9f9f9;">
+                    <h2 style="color: #ff4444; border-bottom: 2px solid #ff4444; padding-bottom: 10px;">Registration Update</h2>
+                    <p style="margin: 10px 0;">Dear ${registration.name},</p>
+                    <p style="margin: 10px 0;">We regret to inform you that your registration could not be verified at this time.</p>
+                    <p style="margin: 10px 0;">This might be due to:</p>
+                    <ul>
+                        <li>Invalid payment details</li>
+                        <li>Incomplete information</li>
+                        <li>Payment verification issues</li>
+                    </ul>
+                    <p style="margin: 10px 0;">Please contact us for more information or try registering again.</p>
+                    <p>Best regards,<br>Team Cynet</p>
+                </div>
+            `;
+        }
+
+        // Send email if status is verified or rejected
+        if (emailHtml && emailSubject) {
+            try {
+                await sendEmail(
+                    registration.email,
+                    emailSubject,
+                    emailHtml
+                );
+            } catch (emailError) {
+                console.error('Failed to send status update email:', emailError);
+                // Continue with the status update even if email fails
+            }
+        }
+
+        // Return the updated registration data
         const serializedRegistration = {
-            ...registration,
+            ...registration.toObject(),
             _id: registration._id.toString(),
             createdAt: registration.createdAt?.toISOString(),
             updatedAt: registration.updatedAt?.toISOString()
         };
 
-        return { success: true, data: serializedRegistration };
+        return { 
+            success: true, 
+            data: serializedRegistration 
+        };
+
     } catch (error) {
         console.error('Error updating status:', error);
         return { 
