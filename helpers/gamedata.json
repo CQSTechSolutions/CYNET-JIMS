@@ -115,7 +115,7 @@
 				"Screenshot required for results"
 			],
 			"price": 30,
-            "coordinators": [
+      "coordinators": [
 				{
 					"name": "Ayush Dhaiya",
 					"semester": "2nd",
@@ -141,7 +141,19 @@
 				"No leaving during matches",
 				"Screenshot required for results"
 			],
-			"price": 30
+			"price": 30,
+			"coordinators": [
+				{
+					"name": "Ayush Dhaiya",
+					"semester": "2nd",
+					"contact": "9810480038"
+				},
+				{
+				    "name": "Aditya Kapoor",
+				    "semester": "2nd",
+				    "contact": "9650213458"
+				}
+			]
 		},
 		{
 			"id": "valorant-tournament",
