@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata = {
   title: "Cynet - IT Fest of JIMS VK",
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
         className={`antialiased overflow-x-hidden`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
