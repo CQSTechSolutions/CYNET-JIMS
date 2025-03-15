@@ -1,167 +1,249 @@
 {
-    "gamedata": [
-        {
-            "id": "assassin-creed-shadow",
-            "name": "Assassin's Creed: Shadows Tournament",
-            "platform": "PC",
-            "format": "Individual",
-            "location": "On-venue",
-            "rules": [
-                "Game Mode: To be revealed on event day",
-                "Mission completion within given time",
-                "Winner selected based on shortest completion time",
-                "Individual participation only",
-                "Knockout bracket format",
-                "No external scripts or mods allowed",
-                "5-minute grace period for no-shows"
-            ],
-            "price": 50
-        },
-        {
-            "id": "bgmi-tournament",
-            "name": "BGMI Tournament",
-            "platform": "Mobile",
-            "format": "Squad",
-            "location": "Online",
-            "rules": [
-                "Must join official Discord server",
-                "Mobile devices only, no emulators",
-                "Classic Squad mode",
-                "Points-based system",
-                "One substitute player allowed per team",
-                "Best of Three (BO3) format for playoffs"
-            ],
-            "price": 200
-        },
-        {
-            "id": "takken-7",
-            "name": "Tekken 7 Tournament",
-            "platform": "PC",
-            "format": "1v1",
-            "location": "On-venue",
-            "rules": [
-                "Best of 3 rounds per match",
-                "60 seconds per round",
-                "Random stage selection",
-                "Standard character selection",
-                "No macro or turbo use",
-                "5-minute grace period"
-            ],
-            "price": 50
-        },
-        {
-            "id": "smash-kart",
-            "name": "Smash Kart Tournament",
-            "platform": "Mobile",
-            "format": "Single Knockout",
-            "location": "On-venue",
-            "rules": [
-                "Standard Mode gameplay",
-                "Default track selection",
-                "Winner based on highest ranking",
-                "3-minute tiebreaker if needed",
-                "No technical pauses allowed",
-                "Screenshot required for results"
-            ],
-            "price": 30
-        },
-        {
-            "id": "stumble-guys",
-            "name": "Stumble Guys Tournament",
-            "platform": "Mobile",
-            "format": "Battle Royale",
-            "location": "On-venue",
-            "rules": [
-                "Standard Match format",
-                "Last player standing wins",
-                "No technical pauses",
-                "No leaving during matches",
-                "Screenshot required for results"
-            ],
-            "price": 30
-        },
-        {
-            "id": "valorant-tournament",
-            "name": "Valorant Tournament",
-            "platform": "PC",
-            "format": "5v5 Competitive",
-            "location": "Online",
-            "rules": [
-                "Best-of format (BO1, BO3 for semifinals & finals)",
-                "Official map pool",
-                "13 rounds to win",
-                "One substitute per team",
-                "1-minute tactical pause per half",
-                "Must join Discord 15 minutes before match",
-                "10-15 minute grace period"
-            ],
-            "price": 250
-        },
-        {
-            "id": "squid-games-robolox",
-            "name": "Squid Games (Roblox)",
-            "platform": "Mobile",
-            "format": "Battle Royale",
-            "location": "On-venue",
-            "maxPlayers": 50,
-            "miniGames": [
-                "Red Light, Green Light",
-                "Dalgona Challenge",
-                "Six-Legged Pentathlon",
-                "Tug of War",
-                "Marbles",
-                "Mingle",
-                "Glass Bridge",
-                "Squid Game Final"
-            ],
-            "rules": [
-                "Battle Royale elimination style",
-                "Last player standing wins",
-                "No hacking or exploits",
-                "No teaming allowed",
-                "Disconnected players cannot rejoin"
-            ],
-            "price": 50,
+	"gamedata": [
+		{
+			"id": "assassin-creed-shadow",
+			"name": "Assassin's Creed: Shadows Tournament",
+			"platform": "PC",
+			"format": "Individual",
+			"location": "On-venue",
+			"rules": [
+				"Game Mode: To be revealed on event day",
+				"Mission completion within given time",
+				"Winner selected based on shortest completion time",
+				"Individual participation only",
+				"Knockout bracket format",
+				"No external scripts or mods allowed",
+				"5-minute grace period for no-shows"
+			],
+			"price": 50,
+			"coordinators": [
+				{
+					"name": "",
+					"semester": "2nd",
+					"contact": "9810480038"
+				},
+				{
+					"name": "Hardik Solanki",
+					"semester": "6th",
+					"contact": "8810460033"
+				}
+			]
+		},
+		{
+			"id": "bgmi-tournament",
+			"name": "BGMI Tournament",
+			"platform": "Mobile",
+			"format": "Squad",
+			"location": "Online",
+			"rules": [
+				"Must join official Discord server",
+				"Mobile devices only, no emulators",
+				"Classic Squad mode",
+				"Points-based system",
+				"One substitute player allowed per team",
+				"Best of Three (BO3) format for playoffs"
+			],
+			"price": 200,
+			"coordinators": [
+				{
+					"name": "Keshav Aggarwal",
+					"semester": "6th",
+					"contact": "9899335663"
+				},
+				{
+					"name": "Anurag Singh",
+					"semester": "6th",
+					"contact": "9599570658"
+				},
+				{
+					"name": "Ayush Dhaiya",
+					"semester": "2nd",
+					"contact": "9810480038"
+				}
+			]
+		},
+		{
+			"id": "takken-7",
+			"name": "Tekken 7 Tournament",
+			"platform": "PC",
+			"format": "1v1",
+			"location": "On-venue",
+			"rules": [
+				"Best of 3 rounds per match",
+				"60 seconds per round",
+				"Random stage selection",
+				"Standard character selection",
+				"No macro or turbo use",
+				"5-minute grace period"
+			],
+			"price": 50,
+			"coordinators": [
+				{
+					"name": "Arvind Bhuyan",
+					"semester": "6th",
+					"contact": "9971464515"
+				},
+				{
+					"name": "Pratham Saini",
+					"semester": "6th",
+					"contact": "9250555293"
+				},
+				{
+					"name": "Keshav Aggarwal",
+					"semester": "6th",
+					"contact": "9899335663"
+				},
+				{
+					"name": "Prasoon Tripathi",
+					"semester": "6th",
+					"contact": "9120720142"
+				}
+			]
+		},
+		{
+			"id": "smash-kart",
+			"name": "Smash Kart Tournament",
+			"platform": "Mobile",
+			"format": "Single Knockout",
+			"location": "On-venue",
+			"rules": [
+				"Standard Mode gameplay",
+				"Default track selection",
+				"Winner based on highest ranking",
+				"3-minute tiebreaker if needed",
+				"No technical pauses allowed",
+				"Screenshot required for results"
+			],
+			"price": 30,
             "coordinators": [
+				{
+					"name": "Ayush Dhaiya",
+					"semester": "2nd",
+					"contact": "9810480038"
+				},
+				{
+				    "name": "Aditya Kapoor",
+				    "semester": "2nd",
+				    "contact": "9650213458"
+				}
+			]
+		},
+		{
+			"id": "stumble-guys",
+			"name": "Stumble Guys Tournament",
+			"platform": "Mobile",
+			"format": "Battle Royale",
+			"location": "On-venue",
+			"rules": [
+				"Standard Match format",
+				"Last player standing wins",
+				"No technical pauses",
+				"No leaving during matches",
+				"Screenshot required for results"
+			],
+			"price": 30
+		},
+		{
+			"id": "valorant-tournament",
+			"name": "Valorant Tournament",
+			"platform": "PC",
+			"format": "5v5 Competitive",
+			"location": "Online",
+			"rules": [
+				"Best-of format (BO1, BO3 for semifinals & finals)",
+				"Official map pool",
+				"13 rounds to win",
+				"One substitute per team",
+				"1-minute tactical pause per half",
+				"Must join Discord 15 minutes before match",
+				"10-15 minute grace period"
+			],
+			"price": 250,
+			"coordinators": [
+				{
+					"name": "Hardik Solanki",
+					"semester": "6th",
+					"contact": "8810460033"
+				},
+				{
+					"name": "Prasoon Tripathi",
+					"semester": "6th",
+					"contact": "9120720142"
+				}
+			]
+		},
+		{
+			"id": "squid-games-robolox",
+			"name": "Squid Games (Roblox)",
+			"platform": "Mobile",
+			"format": "Battle Royale",
+			"location": "On-venue",
+			"maxPlayers": 50,
+			"miniGames": [
+				"Red Light, Green Light",
+				"Dalgona Challenge",
+				"Six-Legged Pentathlon",
+				"Tug of War",
+				"Marbles",
+				"Mingle",
+				"Glass Bridge",
+				"Squid Game Final"
+			],
+			"rules": [
+				"Battle Royale elimination style",
+				"Last player standing wins",
+				"No hacking or exploits",
+				"No teaming allowed",
+				"Disconnected players cannot rejoin"
+			],
+			"price": 50,
+			"coordinators": [
+				{
+					"name": "Hardik Solanki",
+					"semester": "6th",
+					"contact": "8810460033"
+				},
                 {
-                    "name": "Ayush Dahiya",
-                    "semester": "2nd",
-                    "contact": "9810480038"
-                },
-                {
-                    "name": "Hardik Solanki",
-                    "semester": "6th",
-                    "contact": "8810460033"
-                }
-            ]
-        },
-        {
-            "id": "mortal-kombat-11",
-            "name": "Mortal Kombat 11 Ultimate Tournament",
-            "platform": "Gaming Laptop",
-            "format": "Single Elimination",
-            "location": "On-venue",
-            "rules": [
-                "Eligibility: Open to all currently enrolled students of the college.",
-                "Students from other colleges must present an original ID card at the time of the event.",
-                "Participants must register before the deadline to be eligible.",
-                "Each participant must carry a valid college ID at the time of the event.",
-                "Game Settings: Mortal Kombat 11 Ultimate, Versus Mode, Played on a monitor.",
-                "Rounds: Best of 3, Character Customization: Disabled, Stage Select: Random.",
-                "Match Format: First to 2 wins advances to the next round, Final Match: Best of 5 rounds.",
-                "Players are allowed to change characters only after a loss.",
-                "Code of Conduct: Maintain sportsmanship and respect towards opponents and organizers.",
-                "No pausing or disconnecting during a match.",
-                "Any form of cheating, collusion, or exploiting glitches will result in disqualification.",
-                "Decisions made by tournament organizers are final.",
-                "Equipment and Controllers: Use own controllers or default controllers provided by organizers.",
-                "Mod or illegal controllers are not allowed.",
-                "Report any technical issues to the organizers immediately.",
-                "Prizes: First Place: INR 1,000, Second Place: INR 500, Third Place: INR 300, Total Prize Pool: INR 1,800.",
-                "Miscellaneous: Report 15 minutes before scheduled match, Restart match in case of tie or disconnection.",
-                "Tournament schedule will be shared with all participants in advance."
-            ],
-            "price": 100
-        }
-    ]
+					"name": "Anurag Singh",
+					"semester": "6th",
+					"contact": "9599570658"
+				},
+			]
+		},
+		{
+			"id": "mortal-kombat-11",
+			"name": "Mortal Kombat 11 Ultimate Tournament",
+			"platform": "Gaming Laptop",
+			"format": "Single Elimination",
+			"location": "On-venue",
+			"rules": [
+				"Eligibility: Open to all currently enrolled students of the college.",
+				"Students from other colleges must present an original ID card at the time of the event.",
+				"Participants must register before the deadline to be eligible.",
+				"Each participant must carry a valid college ID at the time of the event.",
+				"Game Settings: Mortal Kombat 11 Ultimate, Versus Mode, Played on a monitor.",
+				"Rounds: Best of 3, Character Customization: Disabled, Stage Select: Random.",
+				"Match Format: First to 2 wins advances to the next round, Final Match: Best of 5 rounds.",
+				"Players are allowed to change characters only after a loss.",
+				"Code of Conduct: Maintain sportsmanship and respect towards opponents and organizers.",
+				"No pausing or disconnecting during a match.",
+				"Any form of cheating, collusion, or exploiting glitches will result in disqualification.",
+				"Decisions made by tournament organizers are final.",
+				"Equipment and Controllers: Use own controllers or default controllers provided by organizers.",
+				"Mod or illegal controllers are not allowed.",
+				"Report any technical issues to the organizers immediately.",
+				"Prizes: First Place: INR 1,000, Second Place: INR 500, Third Place: INR 300, Total Prize Pool: INR 1,800.",
+				"Miscellaneous: Report 15 minutes before scheduled match, Restart match in case of tie or disconnection.",
+				"Tournament schedule will be shared with all participants in advance."
+			],
+			"price": 100,
+			"coordinators": [
+				{
+					"name": "Raghuraj Mathur",
+					"semester": "6th",
+					"contact": "9205459849"
+				}
+			]
+		}
+	]
 }
