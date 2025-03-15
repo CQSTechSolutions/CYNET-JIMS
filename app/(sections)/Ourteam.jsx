@@ -35,10 +35,10 @@ const heads = [
     image: "/pr.webp",
   },
   {
-    name: "Aniket Choudhary",
-    role: "Stills & Motions Director",
-    position: "Stills & Motion Team",
-    image: "/sm.webp",
+    name: "Keshav Aggarwal",
+    role: "Developer Director",
+    position: "Developer Team",
+    image: "/dvd.webp",
   },
   {
     name: "Rachel Arora",
