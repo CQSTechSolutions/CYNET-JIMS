@@ -18,14 +18,24 @@
 			"price": 50,
 			"coordinators": [
 				{
-					"name": "",
-					"semester": "2nd",
-					"contact": "9810480038"
+					"name": "Arvind Bhuyan",
+					"semester": "6th",
+					"contact": "9971464515"
 				},
 				{
-					"name": "Hardik Solanki",
+					"name": "Pratham Saini",
 					"semester": "6th",
-					"contact": "8810460033"
+					"contact": "9250555293"
+				},
+				{
+					"name": "Keshav Aggarwal",
+					"semester": "6th",
+					"contact": "9899335663"
+				},
+				{
+					"name": "Prasoon Tripathi",
+					"semester": "6th",
+					"contact": "9120720142"
 				}
 			]
 		},
