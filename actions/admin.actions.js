@@ -3,6 +3,7 @@
 import connectDB from '@/helpers/connectDb.helper';
 import mongoose from 'mongoose';
 import { sendEmail } from '@/utils/mailer';
+import * as XLSX from 'xlsx';
 
 // Import or define the Registration schema
 const RegistrationSchema = new mongoose.Schema({
@@ -181,6 +182,97 @@ export async function updateRegistrationStatus(registrationId, status) {
         return { 
             success: false, 
             error: 'Failed to update status' 
+        };
+    }
+}
+
+/**
+ * Export registrations to Excel by event name and status
+ */
+export async function exportRegistrationsToExcel(eventName, status = 'verified') {
+    try {
+        await connectDB();
+        
+        // Query registrations
+        const query = { status };
+        
+        // If eventName is provided, filter by that event
+        if (eventName && eventName !== 'all') {
+            query.events = { $in: [eventName] };
+        }
+        
+        // Fetch registrations from database
+        const registrations = await Registration.find(query).lean();
+        
+        if (!registrations || registrations.length === 0) {
+            return { 
+                success: false, 
+                error: 'No registrations found with the specified criteria' 
+            };
+        }
+
+        // Format data for Excel
+        const excelData = registrations.map(reg => ({
+            Name: reg.name,
+            Email: reg.email,
+            Phone: reg.phone,
+            College: reg.college,
+            'Enrollment Number': reg.enrollmentNumber,
+            Semester: reg.semester,
+            'Transaction ID': reg.transactionId,
+            Events: reg.events.join(', '),
+            'Total Amount': `₹${reg.totalPayable}`,
+            Status: reg.status,
+            'Registration Date': new Date(reg.createdAt).toLocaleDateString(),
+        }));
+
+        // Create workbook and worksheet
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(excelData);
+        
+        // Set column widths
+        const columnWidths = [
+            { wch: 20 }, // Name
+            { wch: 25 }, // Email
+            { wch: 15 }, // Phone
+            { wch: 25 }, // College
+            { wch: 20 }, // Enrollment Number
+            { wch: 10 }, // Semester
+            { wch: 20 }, // Transaction ID
+            { wch: 40 }, // Events
+            { wch: 15 }, // Total Amount
+            { wch: 10 }, // Status
+            { wch: 15 }, // Registration Date
+        ];
+        
+        worksheet['!cols'] = columnWidths;
+        
+        // Add the worksheet to the workbook
+        const sheetName = eventName === 'all' 
+            ? `All ${status} Registrations` 
+            : `${eventName} - ${status}`;
+        
+        XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+        
+        // Generate buffer
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+        
+        // Convert to base64 for browser download
+        const base64 = Buffer.from(excelBuffer).toString('base64');
+        
+        return { 
+            success: true, 
+            data: {
+                filename: `${sheetName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.xlsx`,
+                content: base64
+            }
+        };
+        
+    } catch (error) {
+        console.error('Error exporting registrations:', error);
+        return { 
+            success: false, 
+            error: 'Failed to export registrations' 
         };
     }
 }

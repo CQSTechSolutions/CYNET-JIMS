@@ -2,8 +2,9 @@
 import { useState, useEffect } from 'react';
 import { CldImage } from 'next-cloudinary';
 import { FaSearch, FaFilter, FaLock } from 'react-icons/fa';
-import { getRegistrations, updateRegistrationStatus, verifyAdmin } from '@/actions/admin.actions';
+import { getRegistrations, updateRegistrationStatus, verifyAdmin, exportRegistrationsToExcel } from '@/actions/admin.actions';
 import toast, { Toaster } from 'react-hot-toast';
+import Image from 'next/image';
 
 const AdminDashboard = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,6 +29,8 @@ const AdminDashboard = () => {
         },
         sortBy: 'newest'
     });
+    const [downloadingExcel, setDownloadingExcel] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState('all');
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -125,6 +128,32 @@ const AdminDashboard = () => {
 
     const uniqueColleges = [...new Set(registrations.map(reg => reg.college))];
     const uniqueSemesters = [...new Set(registrations.map(reg => reg.semester))];
+    const uniqueEvents = [...new Set(registrations.flatMap(reg => reg.events))];
+
+    // Add a function to handle Excel export
+    const handleExportExcel = async (event, status = 'verified') => {
+        try {
+            setDownloadingExcel(true);
+            const result = await exportRegistrationsToExcel(event, status);
+            
+            if (result?.success && result.data) {
+                // Create a download link
+                const link = document.createElement('a');
+                link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${result.data.content}`;
+                link.download = result.data.filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert(result?.error || 'No registrations found to export');
+            }
+        } catch (error) {
+            console.error('Export error:', error);
+            alert('Failed to export data. Please try again.');
+        } finally {
+            setDownloadingExcel(false);
+        }
+    };
 
     if (!isAuthenticated) {
         return (
@@ -232,6 +261,36 @@ const AdminDashboard = () => {
                         <span>{error}</span>
                     </div>
                 )}
+
+                {/* Export Excel Section */}
+                <div className="mb-8 p-4 bg-gray-800 rounded-lg">
+                    <h2 className="text-xl font-semibold mb-4">Export Verified Registrations</h2>
+                    <div className="flex flex-col md:flex-row gap-4 items-center">
+                        <select
+                            value={selectedEvent}
+                            onChange={(e) => setSelectedEvent(e.target.value)}
+                            className="bg-gray-700 text-white px-4 py-2 rounded-md w-full md:w-auto"
+                        >
+                            <option value="all">All Events</option>
+                            {uniqueEvents.map((event, index) => (
+                                <option key={index} value={event}>{event}</option>
+                            ))}
+                        </select>
+                        
+                        <button
+                            onClick={() => handleExportExcel(selectedEvent, 'verified')}
+                            disabled={downloadingExcel}
+                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md w-full md:w-auto flex items-center justify-center"
+                        >
+                            {downloadingExcel ? 'Downloading...' : 'Export Verified Registrations'}
+                            {!downloadingExcel && (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            )}
+                        </button>
+                    </div>
+                </div>
 
                 {/* Advanced Filters Section */}
                 <div className="bg-white p-6 rounded-xl shadow-lg mb-8 space-y-4">
