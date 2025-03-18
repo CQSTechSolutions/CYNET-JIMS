@@ -60,6 +60,24 @@ const RegistrationSchema = new mongoose.Schema({
         type: String,
         enum: ['pending', 'verified', 'rejected'],
         default: 'pending'
+    },
+    teamMembers: {
+        type: [{
+            eventId: String,
+            members: [{
+                name: String,
+                email: String,
+                phone: String,
+                college: String
+            }],
+            substitutes: [{
+                name: String,
+                email: String,
+                phone: String,
+                college: String
+            }]
+        }],
+        required: false
     }
 }, { timestamps: true });
 
@@ -193,15 +211,11 @@ export async function exportRegistrationsToExcel(eventName, status = 'verified')
     try {
         await connectDB();
         
-        // Query registrations
         const query = { status };
-        
-        // If eventName is provided, filter by that event
         if (eventName && eventName !== 'all') {
             query.events = { $in: [eventName] };
         }
         
-        // Fetch registrations from database
         const registrations = await Registration.find(query).lean();
         
         if (!registrations || registrations.length === 0) {
@@ -211,20 +225,64 @@ export async function exportRegistrationsToExcel(eventName, status = 'verified')
             };
         }
 
-        // Format data for Excel
-        const excelData = registrations.map(reg => ({
-            Name: reg.name,
-            Email: reg.email,
-            Phone: reg.phone,
-            College: reg.college,
-            'Enrollment Number': reg.enrollmentNumber,
-            Semester: reg.semester,
-            'Transaction ID': reg.transactionId,
-            Events: reg.events.join(', '),
-            'Total Amount': `₹${reg.totalPayable}`,
-            Status: reg.status,
-            'Registration Date': new Date(reg.createdAt).toLocaleDateString(),
-        }));
+        // Format data for Excel with team member information
+        const excelData = registrations.flatMap(reg => {
+            const baseData = {
+                Name: reg.name,
+                Email: reg.email,
+                Phone: reg.phone,
+                College: reg.college,
+                'Enrollment Number': reg.enrollmentNumber,
+                Semester: reg.semester,
+                'Transaction ID': reg.transactionId,
+                Events: reg.events.join(', '),
+                'Total Amount': `₹${reg.totalPayable}`,
+                Status: reg.status,
+                'Registration Date': new Date(reg.createdAt).toLocaleDateString(),
+                'Member Type': 'Main Registrant'
+            };
+
+            const allRows = [baseData];
+
+            // Add team members if present
+            reg.teamMembers?.forEach(team => {
+                team.members?.forEach(member => {
+                    allRows.push({
+                        Name: member.name,
+                        Email: member.email,
+                        Phone: member.phone,
+                        College: member.college,
+                        'Enrollment Number': '',
+                        Semester: '',
+                        'Transaction ID': reg.transactionId,
+                        Events: reg.events.join(', '),
+                        'Total Amount': `₹${reg.totalPayable}`,
+                        Status: reg.status,
+                        'Registration Date': new Date(reg.createdAt).toLocaleDateString(),
+                        'Member Type': 'Team Member'
+                    });
+                });
+
+                team.substitutes?.forEach(sub => {
+                    allRows.push({
+                        Name: sub.name,
+                        Email: sub.email,
+                        Phone: sub.phone,
+                        College: sub.college,
+                        'Enrollment Number': '',
+                        Semester: '',
+                        'Transaction ID': reg.transactionId,
+                        Events: reg.events.join(', '),
+                        'Total Amount': `₹${reg.totalPayable}`,
+                        Status: reg.status,
+                        'Registration Date': new Date(reg.createdAt).toLocaleDateString(),
+                        'Member Type': 'Substitute'
+                    });
+                });
+            });
+
+            return allRows;
+        });
 
         // Create workbook and worksheet
         const workbook = XLSX.utils.book_new();
@@ -243,6 +301,7 @@ export async function exportRegistrationsToExcel(eventName, status = 'verified')
             { wch: 15 }, // Total Amount
             { wch: 10 }, // Status
             { wch: 15 }, // Registration Date
+            { wch: 15 }, // Member Type
         ];
         
         worksheet['!cols'] = columnWidths;

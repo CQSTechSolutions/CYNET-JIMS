@@ -68,6 +68,24 @@ try {
 				enum: ["pending", "verified", "rejected"],
 				default: "pending",
 			},
+			teamMembers: {
+				type: [{
+					eventId: String,
+					members: [{
+						name: String,
+						email: String,
+						phone: String,
+						college: String
+					}],
+					substitutes: [{
+						name: String,
+						email: String,
+						phone: String,
+						college: String
+					}]
+				}],
+				required: false
+			}
 		},
 		{ timestamps: true },
 	);
@@ -92,6 +110,19 @@ export async function registerForEvents(formData) {
 
 		let events = formData.getAll("events");
 
+		// Get team members data
+		const teamMembersData = [];
+		events.forEach(eventId => {
+			const eventTeamData = JSON.parse(formData.get(`teamMembers_${eventId}`) || "null");
+			if (eventTeamData) {
+				teamMembersData.push({
+					eventId,
+					members: eventTeamData.members,
+					substitutes: eventTeamData.substitutes
+				});
+			}
+		});
+
 		// Validate required fields
 		if (
 			!name ||
@@ -109,6 +140,76 @@ export async function registerForEvents(formData) {
 				message:
 					"All fields are required. Please ensure you have selected at least one event and uploaded payment proof.",
 			};
+		}
+
+		// Validate team members data
+		for (const teamData of teamMembersData) {
+			if (!teamData.members || teamData.members.length === 0) {
+				return {
+					success: false,
+					message: "Team members information is required for multiplayer events.",
+				};
+			}
+
+			// Create a Set to track unique emails and phone numbers
+			const usedEmails = new Set();
+			const usedPhones = new Set();
+
+			// Validate each team member's data
+			for (const member of teamData.members) {
+				if (!member.name || !member.email || !member.phone || !member.college) {
+					return {
+						success: false,
+						message: "All team member details are required.",
+					};
+				}
+
+				// Check for duplicate emails and phones
+				if (usedEmails.has(member.email)) {
+					return {
+						success: false,
+						message: "Each team member must have a unique email address.",
+					};
+				}
+				if (usedPhones.has(member.phone)) {
+					return {
+						success: false,
+						message: "Each team member must have a unique phone number.",
+					};
+				}
+
+				usedEmails.add(member.email);
+				usedPhones.add(member.phone);
+			}
+
+			// Validate substitutes if present
+			if (teamData.substitutes && teamData.substitutes.length > 0) {
+				for (const substitute of teamData.substitutes) {
+					if (!substitute.name || !substitute.email || !substitute.phone || !substitute.college) {
+						return {
+							success: false,
+							message: "All substitute member details are required.",
+						};
+					}
+
+					// Check for duplicate emails and phones
+					if (usedEmails.has(substitute.email)) {
+						return {
+							success: false,
+							message: "Each team member and substitute must have a unique email address.",
+						};
+					}
+					if (usedPhones.has(substitute.phone)) {
+						return {
+							success: false,
+							message: "Each team member and substitute must have a unique phone number.",
+						};
+					}
+
+					usedEmails.add(substitute.email);
+					usedPhones.add(substitute.phone);
+				}
+			}
 		}
 
 		const emailRegex = /^\S+@\S+\.\S+$/;
@@ -156,11 +257,12 @@ export async function registerForEvents(formData) {
 			payment_ss,
 			events,
 			totalPayable: Number(totalPayable),
+			teamMembers: teamMembersData
 		});
 
 		await registration.save();
 
-		// Prepare email content
+		// Prepare email content with CC functionality
 		const userEmailHtml = `
       <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; border: 2px solid #4CAF50; border-radius: 10px;">
         <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">Registration Confirmation - Cynet 2025</h2>
@@ -192,7 +294,23 @@ export async function registerForEvents(formData) {
       </div>
     `;
 
-		// Send notification email to admin
+		// Send emails with CC to team members
+		for (const teamData of teamMembersData) {
+			const teamEmails = [
+				...teamData.members.map(m => m.email),
+				...(teamData.substitutes || []).map(s => s.email)
+			];
+
+			// Send email to the main registrant with team members in CC
+			await sendEmail(
+				email,
+				"Registration Confirmation - Cynet 2025",
+				userEmailHtml,
+				teamEmails // CC all team members
+			);
+		}
+
+		// Send admin notification
 		const adminEmailHtml = `
       <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; border: 2px solid #4CAF50; border-radius: 10px;">
         <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">New Event Registration</h2>
@@ -216,15 +334,11 @@ export async function registerForEvents(formData) {
       </div>
     `;
 
-		// Send emails
-		await Promise.all([
-			sendEmail(email, "Registration Confirmation - Cynet 2025", userEmailHtml),
-			sendEmail(
-				process.env.EMAIL_USER,
-				`New Registration: ${name} - ${events.length} events`,
-				adminEmailHtml,
-			),
-		]);
+		await sendEmail(
+			process.env.EMAIL_USER,
+			`New Registration: ${name} - ${events.length} events`,
+			adminEmailHtml
+		);
 
 		revalidatePath("/register-for-events");
 
