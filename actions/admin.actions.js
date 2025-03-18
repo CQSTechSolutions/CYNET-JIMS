@@ -248,9 +248,24 @@ export async function exportRegistrationsToExcel(eventName, status = 'verified')
         worksheet['!cols'] = columnWidths;
         
         // Add the worksheet to the workbook
-        const sheetName = eventName === 'all' 
+        let sheetName = eventName === 'all' 
             ? `All ${status} Registrations` 
             : `${eventName} - ${status}`;
+            
+        // Ensure sheet name doesn't exceed 31 characters
+        if (sheetName.length > 31) {
+            // If it's "all" events, prioritize status
+            if (eventName === 'all') {
+                sheetName = `All ${status.substring(0, 3)} Regs`;
+            } else {
+                // For specific events, truncate event name if needed
+                const maxEventLength = 27 - status.length; // 27 to account for " - " and status
+                const truncatedEvent = eventName.length > maxEventLength 
+                    ? eventName.substring(0, maxEventLength - 2) + '..' 
+                    : eventName;
+                sheetName = `${truncatedEvent} - ${status}`;
+            }
+        }
         
         XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
         
