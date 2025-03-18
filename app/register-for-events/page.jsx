@@ -50,7 +50,7 @@ const Page = () => {
 
     const gamexcite = [
         { id: "Assassin-creed-shadow", name: "Assassin's Creed Shadows", price: 50 , multiplayer: 0, substitute: 0},
-        { id: "bgmi-tournament", name: "BGMI Tournament", price: 200 , multiplayer:1, substitute: 1 },
+        { id: "bgmi-tournament", name: "BGMI Tournament", price: 200 , multiplayer:4, substitute: 1 },
         { id: "takken-7", name: "Tekken 7", price: 50 , multiplayer: 0, substitute: 0},
         { id: "smash-kart", name: "Smash Karts", price: 30 , multiplayer: 0, substitute: 0},
         { id: "stumble-guys", name: "Stumble Guys", price: 30 , multiplayer: 0, substitute: 0},
