@@ -8,7 +8,7 @@ const BigText = () => {
     },
     {
       big_Letter: "y",
-      small_Letter: "Present",
+      small_Letter: "Presents",
     },
     {
       big_Letter: "n",
