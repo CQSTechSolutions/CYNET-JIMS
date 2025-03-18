@@ -4,6 +4,7 @@ import connectDB from '@/helpers/connectDb.helper';
 import mongoose from 'mongoose';
 import { sendEmail } from '@/utils/mailer';
 import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 
 // Import or define the Registration schema
 const RegistrationSchema = new mongoose.Schema({
@@ -88,16 +89,31 @@ export async function getRegistrations() {
     try {
         await connectDB();
         
-        const registrations = await Registration.find({})
-            .sort({ createdAt: -1 })
-            .lean();
+        const registrations = await Registration.find({}).sort({ createdAt: -1 });
         
-        const serializedRegistrations = registrations.map(reg => ({
-            ...reg,
-            _id: reg._id.toString(),
-            createdAt: reg.createdAt?.toISOString(),
-            updatedAt: reg.updatedAt?.toISOString()
-        }));
+        // Properly serialize the MongoDB documents
+        const serializedRegistrations = registrations.map(reg => {
+            const regObj = reg.toObject();
+            return {
+                ...regObj,
+                _id: regObj._id.toString(),
+                createdAt: regObj.createdAt?.toISOString(),
+                updatedAt: regObj.updatedAt?.toISOString(),
+                // Ensure teamMembers are properly serialized
+                teamMembers: regObj.teamMembers?.map(team => ({
+                    ...team,
+                    _id: team._id?.toString(),
+                    members: team.members?.map(member => ({
+                        ...member,
+                        _id: member._id?.toString()
+                    })),
+                    substitutes: team.substitutes?.map(sub => ({
+                        ...sub,
+                        _id: sub._id?.toString()
+                    }))
+                }))
+            };
+        });
 
         return { success: true, data: serializedRegistrations };
     } catch (error) {
@@ -207,146 +223,142 @@ export async function updateRegistrationStatus(registrationId, status) {
 /**
  * Export registrations to Excel by event name and status
  */
-export async function exportRegistrationsToExcel(eventName, status = 'verified') {
+export async function exportRegistrationsToExcel(event = 'all', status = 'verified') {
     try {
         await connectDB();
-        
+
+        // Build query based on event and status
         const query = { status };
-        if (eventName && eventName !== 'all') {
-            query.events = { $in: [eventName] };
+        if (event !== 'all') {
+            query.events = event;
         }
-        
-        const registrations = await Registration.find(query).lean();
-        
+
+        const registrations = await Registration.find(query);
+
         if (!registrations || registrations.length === 0) {
-            return { 
-                success: false, 
-                error: 'No registrations found with the specified criteria' 
+            return {
+                success: false,
+                error: 'No registrations found to export'
             };
         }
 
-        // Format data for Excel with team member information
-        const excelData = registrations.flatMap(reg => {
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet(event === 'all' ? 'All Events' : event.substring(0, 31));
+
+        // Define columns with specific widths
+        worksheet.columns = [
+            { header: 'Registration Date', key: 'date', width: 20 },
+            { header: 'Name', key: 'name', width: 25 },
+            { header: 'Email', key: 'email', width: 30 },
+            { header: 'Phone', key: 'phone', width: 15 },
+            { header: 'College', key: 'college', width: 30 },
+            { header: 'Enrollment Number', key: 'enrollmentNumber', width: 20 },
+            { header: 'Semester', key: 'semester', width: 10 },
+            { header: 'Events', key: 'events', width: 30 },
+            { header: 'Event ID', key: 'eventId', width: 20 },
+            { header: 'Role', key: 'role', width: 15 },
+            { header: 'Member Name', key: 'memberName', width: 25 },
+            { header: 'Member Email', key: 'memberEmail', width: 30 },
+            { header: 'Member Phone', key: 'memberPhone', width: 15 },
+            { header: 'Member College', key: 'memberCollege', width: 30 },
+            { header: 'Transaction ID', key: 'transactionId', width: 20 },
+            { header: 'Amount', key: 'amount', width: 10 },
+            { header: 'Status', key: 'status', width: 10 }
+        ];
+
+        // Style the header row
+        worksheet.getRow(1).font = { bold: true };
+        worksheet.getRow(1).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFE2F0D9' }
+        };
+
+        // Add data rows
+        registrations.forEach(registration => {
             const baseData = {
-                Name: reg.name,
-                Email: reg.email,
-                Phone: reg.phone,
-                College: reg.college,
-                'Enrollment Number': reg.enrollmentNumber,
-                Semester: reg.semester,
-                'Transaction ID': reg.transactionId,
-                Events: reg.events.join(', '),
-                'Total Amount': `₹${reg.totalPayable}`,
-                Status: reg.status,
-                'Registration Date': new Date(reg.createdAt).toLocaleDateString(),
-                'Member Type': 'Main Registrant'
+                date: registration.createdAt.toLocaleString(),
+                name: registration.name,
+                email: registration.email,
+                phone: registration.phone,
+                college: registration.college,
+                enrollmentNumber: registration.enrollmentNumber,
+                semester: registration.semester,
+                events: registration.events.join(', '),
+                transactionId: registration.transactionId,
+                amount: registration.totalPayable,
+                status: registration.status
             };
 
-            const allRows = [baseData];
-
-            // Add team members if present
-            reg.teamMembers?.forEach(team => {
-                team.members?.forEach(member => {
-                    allRows.push({
-                        Name: member.name,
-                        Email: member.email,
-                        Phone: member.phone,
-                        College: member.college,
-                        'Enrollment Number': '',
-                        Semester: '',
-                        'Transaction ID': reg.transactionId,
-                        Events: reg.events.join(', '),
-                        'Total Amount': `₹${reg.totalPayable}`,
-                        Status: reg.status,
-                        'Registration Date': new Date(reg.createdAt).toLocaleDateString(),
-                        'Member Type': 'Team Member'
-                    });
+            // Add main registrant as team leader for each event
+            registration.events.forEach(eventName => {
+                const teamData = registration.teamMembers?.find(t => t.eventId === eventName);
+                
+                // Add main registrant row
+                worksheet.addRow({
+                    ...baseData,
+                    eventId: eventName,
+                    role: 'Team Leader',
+                    memberName: registration.name,
+                    memberEmail: registration.email,
+                    memberPhone: registration.phone,
+                    memberCollege: registration.college
                 });
 
-                team.substitutes?.forEach(sub => {
-                    allRows.push({
-                        Name: sub.name,
-                        Email: sub.email,
-                        Phone: sub.phone,
-                        College: sub.college,
-                        'Enrollment Number': '',
-                        Semester: '',
-                        'Transaction ID': reg.transactionId,
-                        Events: reg.events.join(', '),
-                        'Total Amount': `₹${reg.totalPayable}`,
-                        Status: reg.status,
-                        'Registration Date': new Date(reg.createdAt).toLocaleDateString(),
-                        'Member Type': 'Substitute'
+                // Add team members
+                if (teamData?.members) {
+                    teamData.members.slice(1).forEach((member, index) => {
+                        worksheet.addRow({
+                            ...baseData,
+                            eventId: eventName,
+                            role: `Team Member ${index + 1}`,
+                            memberName: member.name,
+                            memberEmail: member.email,
+                            memberPhone: member.phone,
+                            memberCollege: member.college
+                        });
                     });
-                });
+                }
+
+                // Add substitutes
+                if (teamData?.substitutes) {
+                    teamData.substitutes.forEach((sub, index) => {
+                        worksheet.addRow({
+                            ...baseData,
+                            eventId: eventName,
+                            role: `Substitute ${index + 1}`,
+                            memberName: sub.name,
+                            memberEmail: sub.email,
+                            memberPhone: sub.phone,
+                            memberCollege: sub.college
+                        });
+                    });
+                }
             });
-
-            return allRows;
         });
 
-        // Create workbook and worksheet
-        const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(excelData);
-        
-        // Set column widths
-        const columnWidths = [
-            { wch: 20 }, // Name
-            { wch: 25 }, // Email
-            { wch: 15 }, // Phone
-            { wch: 25 }, // College
-            { wch: 20 }, // Enrollment Number
-            { wch: 10 }, // Semester
-            { wch: 20 }, // Transaction ID
-            { wch: 40 }, // Events
-            { wch: 15 }, // Total Amount
-            { wch: 10 }, // Status
-            { wch: 15 }, // Registration Date
-            { wch: 15 }, // Member Type
-        ];
-        
-        worksheet['!cols'] = columnWidths;
-        
-        // Add the worksheet to the workbook
-        let sheetName = eventName === 'all' 
-            ? `All ${status} Registrations` 
-            : `${eventName} - ${status}`;
-            
-        // Ensure sheet name doesn't exceed 31 characters
-        if (sheetName.length > 31) {
-            // If it's "all" events, prioritize status
-            if (eventName === 'all') {
-                sheetName = `All ${status.substring(0, 3)} Regs`;
-            } else {
-                // For specific events, truncate event name if needed
-                const maxEventLength = 27 - status.length; // 27 to account for " - " and status
-                const truncatedEvent = eventName.length > maxEventLength 
-                    ? eventName.substring(0, maxEventLength - 2) + '..' 
-                    : eventName;
-                sheetName = `${truncatedEvent} - ${status}`;
-            }
-        }
-        
-        XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
-        
-        // Generate buffer
-        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
-        
-        // Convert to base64 for browser download
-        const base64 = Buffer.from(excelBuffer).toString('base64');
-        
-        return { 
-            success: true, 
+        // Auto-filter for all columns
+        worksheet.autoFilter = {
+            from: { row: 1, column: 1 },
+            to: { row: 1, column: worksheet.columns.length }
+        };
+
+        // Generate Excel file
+        const buffer = await workbook.xlsx.writeBuffer();
+        const content = buffer.toString('base64');
+
+        return {
+            success: true,
             data: {
-                filename: `${sheetName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.xlsx`,
-                content: base64
+                content,
+                filename: `registrations_${event}_${status}_${new Date().toISOString().split('T')[0]}.xlsx`
             }
         };
-        
     } catch (error) {
-        console.error('Error exporting registrations:', error);
-        return { 
-            success: false, 
-            error: 'Failed to export registrations' 
+        console.error('Export error:', error);
+        return {
+            success: false,
+            error: 'Failed to export registrations'
         };
     }
 }

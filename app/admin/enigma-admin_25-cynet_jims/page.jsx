@@ -393,6 +393,7 @@ const AdminDashboard = () => {
                             <tr>
                                 <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">User</th>
                                 <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Events</th>
+                                <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Team Members</th>
                                 <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Payment</th>
                                 <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Status</th>
                                 <th className="px-6 py-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Actions</th>
@@ -401,11 +402,11 @@ const AdminDashboard = () => {
                         <tbody className="divide-y divide-green-100">
                             {loading ? (
                                 <tr>
-                                    <td colSpan="5" className="px-6 py-4 text-center text-green-600">Loading...</td>
+                                    <td colSpan="6" className="px-6 py-4 text-center text-green-600">Loading...</td>
                                 </tr>
                             ) : filteredRegistrations.length === 0 ? (
                                 <tr>
-                                    <td colSpan="5" className="px-6 py-4 text-center text-green-600">No registrations found</td>
+                                    <td colSpan="6" className="px-6 py-4 text-center text-green-600">No registrations found</td>
                                 </tr>
                             ) : filteredRegistrations.map((registration) => (
                                 <tr key={registration._id} className="hover:bg-green-50 transition-colors">
@@ -414,6 +415,9 @@ const AdminDashboard = () => {
                                             <span className="font-medium text-green-800">{registration.name}</span>
                                             <span className="text-sm text-green-600">{registration.email}</span>
                                             <span className="text-sm text-green-600">{registration.phone}</span>
+                                            <span className="text-sm text-green-600">{registration.college}</span>
+                                            <span className="text-sm text-green-600">Enrollment: {registration.enrollmentNumber}</span>
+                                            <span className="text-sm text-green-600">Semester: {registration.semester}</span>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
@@ -425,6 +429,41 @@ const AdminDashboard = () => {
                                                 >
                                                     {event}
                                                 </span>
+                                            ))}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <div className="space-y-4">
+                                            {registration.teamMembers?.map((team, teamIndex) => (
+                                                <div key={teamIndex} className="border-b border-green-100 pb-2 last:border-0 last:pb-0">
+                                                    <h5 className="font-medium text-green-700 mb-2">{team.eventId}</h5>
+                                                    {team.members?.map((member, memberIndex) => (
+                                                        <div key={memberIndex} className="text-sm mb-2">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="bg-green-100 text-green-800 px-2 py-0.5 rounded text-xs">
+                                                                    {memberIndex === 0 ? 'Leader' : `Member ${memberIndex + 1}`}
+                                                                </span>
+                                                                <span>{member.name}</span>
+                                                            </div>
+                                                            <div className="text-green-600 text-xs ml-6">
+                                                                {member.email} | {member.phone} | {member.college}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                    {team.substitutes?.map((sub, subIndex) => (
+                                                        <div key={subIndex} className="text-sm mb-2">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded text-xs">
+                                                                    Substitute {subIndex + 1}
+                                                                </span>
+                                                                <span>{sub.name}</span>
+                                                            </div>
+                                                            <div className="text-green-600 text-xs ml-6">
+                                                                {sub.email} | {sub.phone} | {sub.college}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             ))}
                                         </div>
                                     </td>

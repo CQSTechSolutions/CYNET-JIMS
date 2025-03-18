@@ -68,24 +68,60 @@ try {
 				enum: ["pending", "verified", "rejected"],
 				default: "pending",
 			},
-			teamMembers: {
-				type: [{
-					eventId: String,
-					members: [{
-						name: String,
-						email: String,
-						phone: String,
-						college: String
-					}],
-					substitutes: [{
-						name: String,
-						email: String,
-						phone: String,
-						college: String
-					}]
+			teamMembers: [{
+				eventId: {
+					type: String,
+					required: true
+				},
+				members: [{
+					name: {
+						type: String,
+						required: true,
+						trim: true
+					},
+					email: {
+						type: String,
+						required: true,
+						trim: true,
+						lowercase: true,
+						match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"]
+					},
+					phone: {
+						type: String,
+						required: true,
+						trim: true
+					},
+					college: {
+						type: String,
+						required: true,
+						trim: true
+					}
 				}],
-				required: false
-			}
+				substitutes: [{
+					name: {
+						type: String,
+						required: true,
+						trim: true
+					},
+					email: {
+						type: String,
+						required: true,
+						trim: true,
+						lowercase: true,
+						match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"]
+					},
+					phone: {
+						type: String,
+						required: true,
+						trim: true
+					},
+					college: {
+						type: String,
+						required: true,
+						trim: true
+					}
+				}]
+			}]
 		},
 		{ timestamps: true },
 	);
@@ -113,15 +149,32 @@ export async function registerForEvents(formData) {
 		// Get team members data
 		const teamMembersData = [];
 		events.forEach(eventId => {
-			const eventTeamData = JSON.parse(formData.get(`teamMembers_${eventId}`) || "null");
-			if (eventTeamData) {
-				teamMembersData.push({
-					eventId,
-					members: eventTeamData.members,
-					substitutes: eventTeamData.substitutes
-				});
+			const eventTeamDataStr = formData.get(`teamMembers_${eventId}`);
+			console.log(`Team data for event ${eventId}:`, eventTeamDataStr);
+			
+			if (eventTeamDataStr) {
+				try {
+					const eventTeamData = JSON.parse(eventTeamDataStr);
+					console.log('Parsed team data:', eventTeamData);
+					
+					if (eventTeamData && (eventTeamData.members?.length > 0 || eventTeamData.substitutes?.length > 0)) {
+						teamMembersData.push({
+							eventId,
+							members: eventTeamData.members || [],
+							substitutes: eventTeamData.substitutes || []
+						});
+					}
+				} catch (error) {
+					console.error(`Error parsing team data for event ${eventId}:`, error);
+					return {
+						success: false,
+						message: "Invalid team member data format. Please try again."
+					};
+				}
 			}
 		});
+
+		console.log('Final team members data:', teamMembersData);
 
 		// Validate required fields
 		if (
@@ -257,8 +310,10 @@ export async function registerForEvents(formData) {
 			payment_ss,
 			events,
 			totalPayable: Number(totalPayable),
-			teamMembers: teamMembersData
+			teamMembers: teamMembersData.length > 0 ? teamMembersData : undefined
 		});
+
+		console.log('Registration object before save:', registration);
 
 		await registration.save();
 
@@ -331,6 +386,35 @@ export async function registerForEvents(formData) {
         <ul style="list-style-type: none; padding: 0;">
           ${events.map((event) => `<li style="border-bottom: 1px solid #ddd; padding: 8px;">${event}</li>`).join("")}
         </ul>
+
+        ${teamMembersData.length > 0 ? `
+            <h3 style="color: #4CAF50;">Team Members:</h3>
+            ${teamMembersData.map(team => `
+                <div style="margin-bottom: 15px;">
+                    <h4 style="color: #4CAF50;">Event: ${team.eventId}</h4>
+                    ${team.members.length > 0 ? `
+                        <p style="font-weight: bold;">Members:</p>
+                        <ul style="list-style-type: none; padding: 0;">
+                            ${team.members.map((member, index) => `
+                                <li style="border-bottom: 1px solid #ddd; padding: 8px;">
+                                    ${index === 0 ? 'Leader' : `Member ${index + 1}`}: ${member.name} (${member.email})
+                                </li>
+                            `).join('')}
+                        </ul>
+                    ` : ''}
+                    ${team.substitutes && team.substitutes.length > 0 ? `
+                        <p style="font-weight: bold;">Substitutes:</p>
+                        <ul style="list-style-type: none; padding: 0;">
+                            ${team.substitutes.map((sub, index) => `
+                                <li style="border-bottom: 1px solid #ddd; padding: 8px;">
+                                    Substitute ${index + 1}: ${sub.name} (${sub.email})
+                                </li>
+                            `).join('')}
+                        </ul>
+                    ` : ''}
+                </div>
+            `).join('')}
+        ` : ''}
       </div>
     `;
 
