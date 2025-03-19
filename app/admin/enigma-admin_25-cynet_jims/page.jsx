@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 const AdminDashboard = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [totalRegistrations, setTotalRegistration] = useState(0);
     const [loginForm, setLoginForm] = useState({
         username: '',
         password: ''
@@ -59,6 +60,8 @@ const AdminDashboard = () => {
             const result = await getRegistrations();
             if (result?.success) {
                 setRegistrations(result.data || []);
+                console.log(result.data.length);
+                console.log(result.data);
             } else {
                 setError(result?.error || 'Failed to fetch registrations');
                 setRegistrations([]);
