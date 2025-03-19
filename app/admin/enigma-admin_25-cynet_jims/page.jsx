@@ -60,8 +60,7 @@ const AdminDashboard = () => {
             const result = await getRegistrations();
             if (result?.success) {
                 setRegistrations(result.data || []);
-                console.log(result.data.length);
-                console.log(result.data);
+                setTotalRegistration(result.data.length);
             } else {
                 setError(result?.error || 'Failed to fetch registrations');
                 setRegistrations([]);
@@ -391,6 +390,7 @@ const AdminDashboard = () => {
 
                 {/* Registrations Table */}
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <h1>Total Registrations {totalRegistrations}</h1>
                     <table className="min-w-full divide-y divide-green-100">
                         <thead className="bg-green-50">
                             <tr>
