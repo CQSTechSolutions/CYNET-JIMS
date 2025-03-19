@@ -60,6 +60,7 @@ const AdminDashboard = () => {
             const result = await getRegistrations();
             if (result?.success) {
                 setRegistrations(result.data || []);
+                console.log(result.data);
                 setTotalRegistration(result.data.length);
             } else {
                 setError(result?.error || 'Failed to fetch registrations');
