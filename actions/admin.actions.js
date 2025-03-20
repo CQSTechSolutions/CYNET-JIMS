@@ -228,11 +228,15 @@ export async function exportRegistrationsToExcel(event = 'all', status = 'verifi
         await connectDB();
 
         // Build query based on event and status
-        const query = { status };
+        const query = {};
+        if (status !== 'all') {
+            query.status = status;
+        }
         if (event !== 'all') {
             query.events = event;
         }
 
+        console.log('Export query:', query);
         const registrations = await Registration.find(query);
 
         if (!registrations || registrations.length === 0) {
@@ -243,7 +247,8 @@ export async function exportRegistrationsToExcel(event = 'all', status = 'verifi
         }
 
         const workbook = new ExcelJS.Workbook();
-        const worksheet = workbook.addWorksheet(event === 'all' ? 'All Events' : event.substring(0, 31));
+        const sheetName = `${event === 'all' ? 'All' : event.substring(0, 20)} - ${status === 'all' ? 'All Status' : status}`;
+        const worksheet = workbook.addWorksheet(sheetName.substring(0, 31));
 
         // Define columns with specific widths
         worksheet.columns = [
@@ -385,5 +390,41 @@ export async function verifyAdmin(credentials) {
     } catch (error) {
         console.error('Authentication error:', error);
         return { success: false };
+    }
+}
+
+/**
+ * Delete all rejected registrations
+ */
+export async function deleteRejectedRegistrations() {
+    try {
+        await connectDB();
+        
+        // Find all rejected registrations first to get the count
+        const rejected = await Registration.find({ status: 'rejected' });
+        const count = rejected.length;
+        
+        if (count === 0) {
+            return {
+                success: true,
+                count: 0,
+                message: 'No rejected registrations found'
+            };
+        }
+        
+        // Delete all rejected registrations
+        await Registration.deleteMany({ status: 'rejected' });
+        
+        return {
+            success: true,
+            count,
+            message: `Successfully deleted ${count} rejected registrations`
+        };
+    } catch (error) {
+        console.error('Error deleting rejected registrations:', error);
+        return {
+            success: false,
+            error: 'Failed to delete rejected registrations'
+        };
     }
 } 
