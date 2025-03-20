@@ -4,7 +4,7 @@ import {motion} from "framer-motion";
 import { useState } from "react";
 
 const heads = [
-    {name: "Dhruv", role: "President - Enigam IT Club", image: "/prs.webp"},
+    {name: "Dhruv", role: "President - Enigam IT Club", image: "/our-team/dhruv.jpeg"},
     {name: "Jatinder", role: "President - Bug Slayers", image: "/pr2.jpeg"}
 ];
 
