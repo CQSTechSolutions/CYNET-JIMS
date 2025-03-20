@@ -11,18 +11,6 @@ const heads = [
     image: "/our-team/DivyantMayank.jpg",
   },
   {
-    name: "Mehak Arora",
-    role: "Secretary",
-    position: "Core Team",
-    image: "/our-team/mehak.jpeg",
-  },
-  {
-    name: "Megha",
-    role: "Secretary (Bug Slayers)",
-    position: "Core Team",
-    image: "/our-team/Megha.jpg",
-  },
-  {
     name: "Vivek Prasad",
     role: "Vice President (Bug Slayers)",
     position: "Core Team",
@@ -35,10 +23,16 @@ const heads = [
     image: "/our-team/divyanshishukla.jpg",
   },
   {
-    name: "Garima Negi",
-    role: "Decoration Manager",
+    name: "Mehak Arora",
+    role: "Secretary",
     position: "Core Team",
-    image: "/our-team/Garimanegi.jpg",
+    image: "/our-team/mehak.jpeg",
+  },
+  {
+    name: "Megha",
+    role: "Secretary (Bug Slayers)",
+    position: "Core Team",
+    image: "/our-team/Megha.jpg",
   },
   {
     name: "Harshit Verma",
@@ -47,10 +41,22 @@ const heads = [
     image: "/our-team/harshitVerma.jpg",
   },
   {
+    name: "Garima Negi",
+    role: "Decoration Manager",
+    position: "Core Team",
+    image: "/our-team/Garimanegi.jpg",
+  },
+  {
     name: "Kirat Awasthi",
     role: "Marketing Director",
     position: "Marketing Team",
     image: "/our-team/kirat.jpeg",
+  },
+  {
+    name: "Vanshika Vats",
+    role: "Social Media Director (Bug Slayers)",
+    position: "Social Media Team",
+    image: "/our-team/VanshikaVats.jpg",
   },
   {
     name: "Hardik Solanki",
@@ -69,12 +75,6 @@ const heads = [
     role: "Social Media Director",
     position: "Social Media Team",
     image: "/our-team/rachel.jpeg",
-  },
-  {
-    name: "Vanshika Vats",
-    role: "Social Media Director (Bug Slayers)",
-    position: "Social Media Team",
-    image: "/our-team/VanshikaVats.jpg",
   },
   {
     name: "Gurnoor Kaur Pawan",
@@ -104,7 +104,7 @@ const Ourteam = () => {
         <h2 className="font-monot text-center text-3xl sm:text-4xl md:text-5xl p-3 py-12 sm:py-16 md:py-20 relative z-10">
           Our Team
         </h2>
-        <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-4 px-4 sm:px-6 md:px-8 lg:px-10 space-y-4 relative z-10">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 sm:px-6 md:px-8 lg:px-10 relative z-10 pb-10">
           {heads.map((head, i) => {
             const { ref, inView } = useInView({
               threshold: 0.1,
@@ -115,7 +115,7 @@ const Ourteam = () => {
               <motion.div
                 key={i}
                 ref={ref}
-                className="relative w-full break-inside-avoid mb-4 group"
+                className="relative w-full group"
                 whileHover={{ scale: 1.02 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
