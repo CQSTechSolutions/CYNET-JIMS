@@ -83,7 +83,7 @@ const heads = [
     image: "/our-team/gurnoor.jpeg",
   },
   {
-    name: "Harshit Kapoor",
+    name: "Harshit Kapur",
     role: "Stills & Motions",
     position: "Stills & Motions Team",
     image: "/our-team/harshitkapoor.jpg",
