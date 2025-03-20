@@ -38,7 +38,7 @@ const heads = [
     name: "Harshit Verma",
     role: "Events Management Director",
     position: "Management Team",
-    image: "/our-team/harshitVerma.jpg",
+    image: "/our-team/harshitVerma.jpeg",
   },
   {
     name: "Garima Negi",
