@@ -65,10 +65,10 @@ const heads = [
     image: "/our-team/HardikSolanki.jpg",
   },
   {
-    name: "Keshav Aggarwal",
+    name: "Shivam Gupta",
     role: "Developer Director",
     position: "Developer Team",
-    image: "/dvd.webp",
+    image: "/shivam.jpeg",
   },
   {
     name: "Rachel Arora",
