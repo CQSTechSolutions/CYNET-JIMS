@@ -349,21 +349,12 @@ export async function registerForEvents(formData) {
       </div>
     `;
 
-		// Send emails with CC to team members
-		for (const teamData of teamMembersData) {
-			const teamEmails = [
-				...teamData.members.map(m => m.email),
-				...(teamData.substitutes || []).map(s => s.email)
-			];
-
-			// Send email to the main registrant with team members in CC
-			await sendEmail(
-				email,
-				"Registration Confirmation - Cynet 2025",
-				userEmailHtml,
-				teamEmails // CC all team members
-			);
-		}
+		// Send email to the main registrant only
+		await sendEmail(
+			email,
+			"Registration Confirmation - Cynet 2025",
+			userEmailHtml
+		);
 
 		// Send admin notification
 		const adminEmailHtml = `
