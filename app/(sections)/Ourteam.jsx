@@ -68,7 +68,7 @@ const heads = [
     name: "Shivam Gupta",
     role: "Developer Director",
     position: "Developer Team",
-    image: "/shivam.jpeg",
+    image: "/our-team/shivam.jpeg",
   },
   {
     name: "Rachel Arora",
