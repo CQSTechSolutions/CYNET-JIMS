@@ -41,8 +41,7 @@ const OfflineRegistrationsOnly = () => {
                   </div>
                   <p className="text-gray-600">
                   JIMS Vasant Kunj
-                  Pocket B, Massodpur
-                  New Delhi, India
+                  OCF Pocket 9, Sector B, Vasant Kunj, New Delhi - 110070
                   </p>
                 </div>
                 
