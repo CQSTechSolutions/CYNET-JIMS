@@ -31,19 +31,20 @@ const Footer = () => {
                     {/* Logo and Description */}
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center gap-2 mb-4">
-                            <Image 
+                            <Image
+                                onClick={()=> window.location.href="https://jimsd.org"}
                                 src="/jimslogo.webp" 
                                 alt="JIMS Logo" 
                                 width={50} 
                                 height={50}
                                 className="rounded-full"
                             />
-                            <h3 className="text-lg font-bold font-monot">CYNET</h3>
+                            <Link href={"https://jimsd.org"} className="text-lg font-bold font-monot">CYNET</Link>
                         </div>
-                        <p className="text-gray-400 mb-4 font-poppins">
+                        <Link href={"https://jimsd.org"} target={"_blank"} className="text-gray-400 mb-4 font-poppins">
                             The flagship Annual IT Fest of JIMS Vasant Kunj, celebrating technology, 
                             innovation, and creativity.
-                        </p>
+                        </Link>
                         <div className="flex space-x-4">
                             <Link href="https://www.instagram.com/enigma.jimsvk?igsh=MWUxa3E3aGt4eHRydw==" target="_blank" className="hover:text-pink-500 transition-colors">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -108,11 +109,11 @@ const Footer = () => {
                     <div>
                         <h4 className="text-lg font-semibold mb-4 font-monot">Contact Us</h4>
                         <div className="space-y-3 font-poppins">
-                            <p className="text-gray-400">
+                            <Link href={"https://jimsd.org"} target={"_blank"} className="text-gray-400">
                                 JIMS Vasant Kunj
                                 <br />
                                 New Delhi, India
-                            </p>
+                            </Link>
                             <p className="text-gray-400">
                                 <a href="tel:+917011880354" className="hover:text-white transition-colors">
                                     +91 7011880354

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const BigText = () => {
   const bigTextCnt = [
@@ -49,12 +50,14 @@ const BigText = () => {
 
       {/* Subtitle Text */}
       <div className="text-center mt-4 sm:mt-6 md:mt-8">
-        <p
+        <Link
+            href={"https://jimsd.org"}
+            target={"_blank"}
           className="font-poppins font-semibold text-white 
                      text-[2.5vw] sm:text-[2vw] md:text-[1.8vw] lg:text-[1.5vw]"
         >
           Jagannath International Management School, Vasant Kunj, New Delhi
-        </p>
+        </Link>
         <p
           className="font-poppins font-bold text-white mt-2 
                      text-[3vw] sm:text-[2.5vw] md:text-[2vw] lg:text-[1.8vw]"
@@ -65,6 +68,7 @@ const BigText = () => {
 
       {/* Logo */}
       <Image
+          onClick={()=>window.location.href="https://jimsd.org"}
         src={"/cylogo.PNG"}
         alt={"cylogo"}
         width={120}
