@@ -18,7 +18,7 @@ const Navbar = () => {
 				}
 			>
 				<div className="flex justify-center items-center">
-					<Link href={"/"}>
+					<Link href={"https://jimsd.org"} target={"_blank"}>
 						<Image
 							src={"/jimslogo.webp"}
 							alt={"logo"}
